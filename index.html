@@ -15,10 +15,24 @@
 <body>
 
 <div class="global-progress" id="global-progress">
-    <div class="global-progress-fill" id="global-progress-fill"></div>
-    <div class="global-progress-title" id="global-progress-title"></div>
-    <span class="global-progress-playicon" id="global-progress-playicon"></span>
-    <div class="global-progress-time" id="global-progress-time">0:00</div>
+
+    <div class="global-progress-scrub" id="global-progress-scrub">
+        <div class="global-progress-rail" id="global-progress-rail">
+            <div class="global-progress-fill" id="global-progress-fill"></div>
+            <div class="global-progress-cap" id="global-progress-cap">
+                <div class="fader-cap-body">
+                    <span class="fader-grip"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="global-progress-info" id="global-progress-info">
+        <div class="global-progress-title" id="global-progress-title"></div>
+        <span class="global-progress-playicon" id="global-progress-playicon"></span>
+        <div class="global-progress-time" id="global-progress-time">0:00</div>
+    </div>
+
 </div>
 
 <div class="full-player" id="full-player">
@@ -42,7 +56,14 @@
 
         <div class="full-player-progress-wrap">
             <div class="full-player-progress" id="full-player-progress">
-                <div class="full-player-progress-fill" id="full-player-progress-fill"></div>
+                <div class="full-player-rail">
+                    <div class="full-player-progress-fill" id="full-player-progress-fill"></div>
+                </div>
+                <div class="full-player-progress-cap" id="full-player-progress-cap">
+                    <div class="fader-cap-body">
+                        <span class="fader-grip"></span>
+                    </div>
+                </div>
             </div>
             <div class="full-player-times">
                 <span id="full-player-current">0:00</span>
@@ -458,9 +479,13 @@ memorySlots.forEach(function(slot, index){
 /* -------------------- */
 
 const globalProgress     = document.getElementById("global-progress");
+const globalProgressScrub= document.getElementById("global-progress-scrub");
+const globalProgressRail = document.getElementById("global-progress-rail");
 const globalProgressFill = document.getElementById("global-progress-fill");
+const globalProgressCap  = document.getElementById("global-progress-cap");
 const globalProgressTime = document.getElementById("global-progress-time");
 const globalProgressTitle    = document.getElementById("global-progress-title");
+const globalProgressInfo     = document.getElementById("global-progress-info");
 const globalProgressPlayIcon = document.getElementById("global-progress-playicon");
 
 const fullPlayer             = document.getElementById("full-player");
@@ -469,6 +494,7 @@ const fullPlayerTitle        = document.getElementById("full-player-title-full")
 const fullPlayerPlayBtn      = document.getElementById("full-player-playbtn");
 const fullPlayerProgress     = document.getElementById("full-player-progress");
 const fullPlayerProgressFill = document.getElementById("full-player-progress-fill");
+const fullPlayerProgressCap  = document.getElementById("full-player-progress-cap");
 const fullPlayerCurrent      = document.getElementById("full-player-current");
 const fullPlayerDuration     = document.getElementById("full-player-duration");
 
@@ -528,7 +554,9 @@ function hideGlobalProgress(){
     closeFullPlayer();
     fullPlayer.classList.remove("is-playing");
     globalProgressFill.style.width = "0%";
+    globalProgressCap.style.left = "0%";
     fullPlayerProgressFill.style.width = "0%";
+    fullPlayerProgressCap.style.left = "0%";
     globalProgressTime.textContent = "0:00";
     fullPlayerCurrent.textContent = "0:00";
     fullPlayerDuration.textContent = "0:00";
@@ -546,7 +574,9 @@ function updateGlobalProgress(transmission){
     if(transmission.duration){
         const ratio = transmission.currentTime / transmission.duration;
         globalProgressFill.style.width = ratio * 100 + "%";
+        globalProgressCap.style.left = ratio * 100 + "%";
         fullPlayerProgressFill.style.width = ratio * 100 + "%";
+        fullPlayerProgressCap.style.left = ratio * 100 + "%";
         fullPlayerDuration.textContent = formatTime(transmission.duration);
     }
     globalProgressTime.textContent = formatTime(transmission.currentTime);
@@ -557,16 +587,14 @@ function updateGlobalProgress(transmission){
 }
 
 /* -------------------- */
-/* GLOBAL PROGRESS BAR SCRUBBING */
+/* GLOBAL PROGRESS BAR SCRUBBING (fader) */
 /* -------------------- */
 
 let isScrubbing  = false;
-let scrubMoved   = false;
-let scrubStartX  = 0;
 
 function seekFromClientX(clientX){
     if(!activeTransmission || !activeTransmission.duration) return;
-    const rect  = globalProgress.getBoundingClientRect();
+    const rect  = globalProgressRail.getBoundingClientRect();
     const ratio = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
     activeTransmission.currentTime = ratio * activeTransmission.duration;
     updateGlobalProgress(activeTransmission);
@@ -575,29 +603,19 @@ function seekFromClientX(clientX){
 function scrubStart(clientX){
     if(!activeTransmission) return;
     isScrubbing = true;
-    scrubMoved = false;
-    scrubStartX = clientX;
+    seekFromClientX(clientX);
 }
 
 function scrubMove(clientX){
     if(!isScrubbing) return;
-    if(Math.abs(clientX - scrubStartX) > 6) scrubMoved = true;
-    if(scrubMoved) seekFromClientX(clientX);
+    seekFromClientX(clientX);
 }
 
 function scrubEnd(){
-    if(!isScrubbing) return;
     isScrubbing = false;
-    if(!scrubMoved){
-        if(isMobileView()){
-            openFullPlayer();
-        } else if(activeToggle){
-            activeToggle();
-        }
-    }
 }
 
-globalProgress.addEventListener("mousedown", function(e){
+globalProgressScrub.addEventListener("mousedown", function(e){
     scrubStart(e.clientX);
 });
 document.addEventListener("mousemove", function(e){
@@ -607,7 +625,7 @@ document.addEventListener("mouseup", function(){
     scrubEnd();
 });
 
-globalProgress.addEventListener("touchstart", function(e){
+globalProgressScrub.addEventListener("touchstart", function(e){
     scrubStart(e.touches[0].clientX);
 }, {passive:true});
 document.addEventListener("touchmove", function(e){
@@ -626,6 +644,10 @@ globalProgressPlayIcon.addEventListener("touchstart", function(e){
 globalProgressPlayIcon.addEventListener("click", function(e){
     e.stopPropagation();
     if(activeToggle) activeToggle();
+});
+
+globalProgressInfo.addEventListener("click", function(){
+    if(isMobileView()) openFullPlayer();
 });
 
 /* -------------------- */
