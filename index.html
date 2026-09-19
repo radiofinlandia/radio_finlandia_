@@ -16,7 +16,42 @@
 
 <div class="global-progress" id="global-progress">
     <div class="global-progress-fill" id="global-progress-fill"></div>
+    <div class="global-progress-title" id="global-progress-title"></div>
+    <span class="global-progress-playicon" id="global-progress-playicon"></span>
     <div class="global-progress-time" id="global-progress-time">0:00</div>
+</div>
+
+<div class="full-player" id="full-player">
+
+    <div class="full-player-top">
+        <button class="full-player-minimize" id="full-player-minimize" aria-label="minimizar">&#8964;</button>
+        <div class="full-player-brand">
+            <span class="live-dot"></span>
+            radio finlandia
+        </div>
+        <span class="full-player-spacer"></span>
+    </div>
+
+    <div class="full-player-body">
+
+        <div class="full-player-title" id="full-player-title-full"></div>
+
+        <button class="full-player-playbtn" id="full-player-playbtn" aria-label="play / pausa">
+            <span class="full-player-playicon" id="full-player-playicon"></span>
+        </button>
+
+        <div class="full-player-progress-wrap">
+            <div class="full-player-progress" id="full-player-progress">
+                <div class="full-player-progress-fill" id="full-player-progress-fill"></div>
+            </div>
+            <div class="full-player-times">
+                <span id="full-player-current">0:00</span>
+                <span id="full-player-duration">0:00</span>
+            </div>
+        </div>
+
+    </div>
+
 </div>
 
 <div class="memory-field" id="memory-field">
@@ -425,9 +460,43 @@ memorySlots.forEach(function(slot, index){
 const globalProgress     = document.getElementById("global-progress");
 const globalProgressFill = document.getElementById("global-progress-fill");
 const globalProgressTime = document.getElementById("global-progress-time");
+const globalProgressTitle    = document.getElementById("global-progress-title");
+const globalProgressPlayIcon = document.getElementById("global-progress-playicon");
+
+const fullPlayer             = document.getElementById("full-player");
+const fullPlayerMinimize     = document.getElementById("full-player-minimize");
+const fullPlayerTitle        = document.getElementById("full-player-title-full");
+const fullPlayerPlayBtn      = document.getElementById("full-player-playbtn");
+const fullPlayerProgress     = document.getElementById("full-player-progress");
+const fullPlayerProgressFill = document.getElementById("full-player-progress-fill");
+const fullPlayerCurrent      = document.getElementById("full-player-current");
+const fullPlayerDuration     = document.getElementById("full-player-duration");
 
 let activeTransmission = null;
 let activeToggle       = null;
+let playIconInterval   = null;
+
+function isMobileView(){
+    return window.matchMedia("(max-width:640px)").matches;
+}
+
+function openFullPlayer(){
+    if(!activeTransmission) return;
+    fullPlayer.classList.add("open");
+}
+
+function closeFullPlayer(){
+    fullPlayer.classList.remove("open");
+}
+
+fullPlayerMinimize.addEventListener("click", function(e){
+    e.stopPropagation();
+    closeFullPlayer();
+});
+
+fullPlayerPlayBtn.addEventListener("click", function(){
+    if(activeToggle) activeToggle();
+});
 
 function formatTime(seconds){
     seconds = Math.max(0, Math.floor(seconds || 0));
@@ -436,24 +505,55 @@ function formatTime(seconds){
     return m + ":" + (s < 10 ? "0" : "") + s;
 }
 
+function currentPlayingLabel(){
+    return activeTransmission ? (transmissionLabels.get(activeTransmission) || "") : "";
+}
+
+function syncPlayIcon(){
+    const playingNow = !!document.querySelector(".transmission.playing, .part-link.playing");
+    globalProgress.classList.toggle("is-playing", playingNow);
+    fullPlayer.classList.toggle("is-playing", playingNow);
+}
+
 function showGlobalProgress(){
     globalProgress.classList.add("active");
+    globalProgressTitle.textContent = currentPlayingLabel();
+    fullPlayerTitle.textContent = currentPlayingLabel();
+    syncPlayIcon();
+    if(!playIconInterval) playIconInterval = setInterval(syncPlayIcon, 200);
 }
 
 function hideGlobalProgress(){
-    globalProgress.classList.remove("active");
+    globalProgress.classList.remove("active", "is-playing");
+    closeFullPlayer();
+    fullPlayer.classList.remove("is-playing");
     globalProgressFill.style.width = "0%";
+    fullPlayerProgressFill.style.width = "0%";
     globalProgressTime.textContent = "0:00";
+    fullPlayerCurrent.textContent = "0:00";
+    fullPlayerDuration.textContent = "0:00";
+    globalProgressTitle.textContent = "";
+    fullPlayerTitle.textContent = "";
     activeTransmission = null;
     activeToggle = null;
+    if(playIconInterval){
+        clearInterval(playIconInterval);
+        playIconInterval = null;
+    }
 }
 
 function updateGlobalProgress(transmission){
     if(transmission.duration){
-        globalProgressFill.style.width =
-            (transmission.currentTime / transmission.duration) * 100 + "%";
+        const ratio = transmission.currentTime / transmission.duration;
+        globalProgressFill.style.width = ratio * 100 + "%";
+        fullPlayerProgressFill.style.width = ratio * 100 + "%";
+        fullPlayerDuration.textContent = formatTime(transmission.duration);
     }
     globalProgressTime.textContent = formatTime(transmission.currentTime);
+    fullPlayerCurrent.textContent = formatTime(transmission.currentTime);
+    const label = currentPlayingLabel();
+    globalProgressTitle.textContent = label;
+    fullPlayerTitle.textContent = label;
 }
 
 /* -------------------- */
@@ -477,19 +577,24 @@ function scrubStart(clientX){
     isScrubbing = true;
     scrubMoved = false;
     scrubStartX = clientX;
-    seekFromClientX(clientX);
 }
 
 function scrubMove(clientX){
     if(!isScrubbing) return;
     if(Math.abs(clientX - scrubStartX) > 6) scrubMoved = true;
-    seekFromClientX(clientX);
+    if(scrubMoved) seekFromClientX(clientX);
 }
 
 function scrubEnd(){
     if(!isScrubbing) return;
     isScrubbing = false;
-    if(!scrubMoved && activeToggle) activeToggle();
+    if(!scrubMoved){
+        if(isMobileView()){
+            openFullPlayer();
+        } else if(activeToggle){
+            activeToggle();
+        }
+    }
 }
 
 globalProgress.addEventListener("mousedown", function(e){
@@ -510,6 +615,53 @@ document.addEventListener("touchmove", function(e){
 }, {passive:true});
 document.addEventListener("touchend", function(){
     scrubEnd();
+});
+
+globalProgressPlayIcon.addEventListener("mousedown", function(e){
+    e.stopPropagation();
+});
+globalProgressPlayIcon.addEventListener("touchstart", function(e){
+    e.stopPropagation();
+}, {passive:true});
+globalProgressPlayIcon.addEventListener("click", function(e){
+    e.stopPropagation();
+    if(activeToggle) activeToggle();
+});
+
+/* -------------------- */
+/* FULL PLAYER PROGRESS BAR SCRUBBING */
+/* -------------------- */
+
+let isScrubbingFull = false;
+
+function seekFromClientXOnFullBar(clientX){
+    if(!activeTransmission || !activeTransmission.duration) return;
+    const rect  = fullPlayerProgress.getBoundingClientRect();
+    const ratio = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
+    activeTransmission.currentTime = ratio * activeTransmission.duration;
+    updateGlobalProgress(activeTransmission);
+}
+
+fullPlayerProgress.addEventListener("mousedown", function(e){
+    isScrubbingFull = true;
+    seekFromClientXOnFullBar(e.clientX);
+});
+document.addEventListener("mousemove", function(e){
+    if(isScrubbingFull) seekFromClientXOnFullBar(e.clientX);
+});
+document.addEventListener("mouseup", function(){
+    isScrubbingFull = false;
+});
+
+fullPlayerProgress.addEventListener("touchstart", function(e){
+    isScrubbingFull = true;
+    seekFromClientXOnFullBar(e.touches[0].clientX);
+}, {passive:true});
+document.addEventListener("touchmove", function(e){
+    if(isScrubbingFull) seekFromClientXOnFullBar(e.touches[0].clientX);
+}, {passive:true});
+document.addEventListener("touchend", function(){
+    isScrubbingFull = false;
 });
 
 /* -------------------- */
@@ -1127,6 +1279,26 @@ transmission012b.addEventListener("ended", function(){
 transmission012b.addEventListener("timeupdate", function(){
     updateGlobalProgress(transmission012b);
 });
+
+/* -------------------- */
+/* MOBILE PLAYER LABELS */
+/* -------------------- */
+
+const transmissionLabels = new Map([
+    [transmission001, rf001.textContent.trim()],
+    [transmission002, rf002Link.textContent.trim()],
+    [transmission003, rf003Link.textContent.trim()],
+    [transmission004, rf004Link.textContent.trim()],
+    [transmission005, rf005Link.textContent.trim()],
+    [transmission006, rf006Link.textContent.trim()],
+    [transmission007, rf007Link.textContent.trim()],
+    [transmission008, rf008Link.textContent.trim()],
+    [transmission009, rf009Link.textContent.trim()],
+    [transmission010, rf010Link.textContent.trim()],
+    [transmission011, rf011Link.textContent.trim()],
+    [transmission012a, RF012_TITLE + " — PARTE A"],
+    [transmission012b, RF012_TITLE + " — PARTE B"]
+]);
 
 /* -------------------- */
 /* INFO OVERLAY */

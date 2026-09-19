@@ -577,6 +577,301 @@ header{
 }
 
 /* -------------------- */
+/* MOBILE PLAYER (title + play icon) */
+/* -------------------- */
+
+.global-progress-title{
+
+    display:none;
+
+    position:relative;
+
+    z-index:2;
+
+    flex:1;
+
+    min-width:0;
+
+    margin-left:16px;
+
+    font-size:13px;
+
+    letter-spacing:.5px;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    pointer-events:none;
+}
+
+.global-progress-playicon{
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    position:relative;
+
+    z-index:2;
+
+    flex:none;
+
+    width:40px;
+    height:40px;
+
+    margin-left:6px;
+
+    cursor:pointer;
+}
+
+.global-progress-playicon::before{
+
+    content:"";
+
+    width:0;
+    height:0;
+
+    border-style:solid;
+
+    border-width:7px 0 7px 11px;
+
+    border-color:transparent transparent transparent #efefef;
+}
+
+.global-progress.is-playing .global-progress-playicon::before{
+
+    width:11px;
+    height:14px;
+
+    border-style:none;
+
+    background:
+        linear-gradient(#efefef,#efefef) 0 0/4px 14px no-repeat,
+        linear-gradient(#efefef,#efefef) 7px 0/4px 14px no-repeat;
+}
+
+/* -------------------- */
+/* FULL SCREEN PLAYER (mobile) */
+/* -------------------- */
+
+.full-player{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:250;
+
+    background:#0c0c0c;
+
+    flex-direction:column;
+
+    transform:translateY(100%);
+
+    transition:transform .35s ease;
+}
+
+.full-player.open{
+
+    transform:translateY(0);
+}
+
+.full-player-top{
+
+    display:flex;
+
+    align-items:center;
+
+    padding:18px 16px;
+
+    padding-top:calc(18px + env(safe-area-inset-top,0px));
+}
+
+.full-player-minimize{
+
+    width:38px;
+
+    background:none;
+
+    border:none;
+
+    color:#efefef;
+
+    font-size:26px;
+
+    line-height:1;
+
+    padding:6px 0;
+
+    cursor:pointer;
+}
+
+.full-player-brand{
+
+    margin:0 auto;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    font-size:14px;
+
+    letter-spacing:1px;
+
+    opacity:.8;
+}
+
+.full-player-brand .live-dot{
+
+    width:8px;
+    height:8px;
+
+    box-shadow:none;
+}
+
+.full-player-spacer{
+
+    width:38px;
+}
+
+.full-player-body{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px 32px;
+
+    gap:40px;
+}
+
+.full-player-title{
+
+    text-align:center;
+
+    font-size:22px;
+
+    letter-spacing:.5px;
+
+    line-height:1.4;
+}
+
+.full-player-playbtn{
+
+    flex:none;
+
+    width:84px;
+    height:84px;
+
+    border-radius:50%;
+
+    border:1px solid #efefef;
+
+    background:none;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    cursor:pointer;
+}
+
+.full-player-playicon{
+
+    width:0;
+    height:0;
+
+    margin-left:6px;
+
+    border-style:solid;
+
+    border-width:14px 0 14px 22px;
+
+    border-color:transparent transparent transparent #efefef;
+}
+
+.full-player.is-playing .full-player-playicon{
+
+    width:22px;
+    height:28px;
+
+    margin-left:0;
+
+    border-style:none;
+
+    background:
+        linear-gradient(#efefef,#efefef) 0 0/8px 28px no-repeat,
+        linear-gradient(#efefef,#efefef) 14px 0/8px 28px no-repeat;
+}
+
+.full-player-progress-wrap{
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+}
+
+.full-player-progress{
+
+    width:100%;
+
+    height:4px;
+
+    background:rgba(255,255,255,.15);
+
+    cursor:pointer;
+
+    touch-action:none;
+}
+
+.full-player-progress-fill{
+
+    height:100%;
+
+    width:0%;
+
+    background:#efd13b;
+}
+
+.full-player-times{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    font-family:"Courier New",monospace;
+
+    font-size:12px;
+
+    letter-spacing:1px;
+
+    opacity:.6;
+}
+
+/* -------------------- */
 /* PARTS DROPDOWN */
 /* -------------------- */
 
@@ -696,4 +991,124 @@ header{
     opacity:.4;
 
     letter-spacing:1px;
+}
+
+/* -------------------- */
+/* MOBILE LAYOUT */
+/* -------------------- */
+
+@media (max-width:640px){
+
+    body{
+
+        font-size:15px;
+
+        padding:16px;
+
+        padding-bottom:84px;
+    }
+
+    header{
+
+        margin-bottom:50px;
+    }
+
+    .memory{
+
+        width:180px;
+    }
+
+    .sphere-section{
+
+        margin-bottom:50px;
+    }
+
+    .sphere{
+
+        font-size:14px;
+    }
+
+    .line{
+
+        margin:50px 0;
+    }
+
+    .archive h2{
+
+        margin-bottom:28px;
+    }
+
+    .entry,
+    .entry-head{
+
+        grid-template-columns:auto auto;
+
+        grid-template-areas:
+            "date id"
+            "title title";
+
+        gap:4px 14px;
+
+        margin-bottom:28px;
+    }
+
+    .entry-head{
+
+        margin-bottom:16px;
+    }
+
+    .date{
+        grid-area:date;
+        font-size:13px;
+    }
+
+    .rf-id{
+        grid-area:id;
+        font-size:13px;
+    }
+
+    .entry > div,
+    .entry-head > div{
+        grid-area:title;
+        margin-top:6px;
+    }
+
+    .transmission,
+    .transmission-secret{
+
+        font-size:16px;
+    }
+
+    .terminal-box{
+
+        padding:24px 22px;
+
+        font-size:15px;
+    }
+
+    .info-content{
+
+        font-size:15px;
+    }
+
+    /* mobile player bar, Spotify-style */
+
+    .global-progress{
+
+        height:64px;
+
+        padding:0 14px;
+    }
+
+    .global-progress-title{
+        display:block;
+    }
+
+    .global-progress-playicon{
+        display:flex;
+    }
+
+    .full-player{
+        display:flex;
+    }
 }
