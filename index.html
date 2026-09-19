@@ -116,7 +116,7 @@
     <div>
 
         <a href="#" id="rf001" class="transmission">
-            ▶ DJ GUANTAZO: IS THIS THING ON?
+            DJ GUANTAZO: IS THIS THING ON?
         </a>
 
         <span class="info-trigger" data-src="tracklists/RF001.txt">[info]</span>
@@ -134,7 +134,7 @@
     <div>
 
         <a href="#" id="rf002" class="transmission transmission-secret">
-            ▶ HASTA LUEGO JAVIER
+            HASTA LUEGO JAVIER
         </a>
 
         <span class="info-trigger" data-src="tracklists/RF002_PILOTO.txt">[info]</span>
@@ -154,7 +154,7 @@
     <div>
 
         <a href="#" id="rf003" class="transmission">
-            ▶ COWBOY LOVE
+            COWBOY LOVE
         </a>
 
         <span class="info-trigger" data-src="tracklists/RF003_COWBOY_LOVE.txt">[info]</span>
@@ -174,7 +174,7 @@
     <div>
 
         <a href="#" id="rf004" class="transmission">
-            ▶ ALLÍ HO TENS : SCAM
+            ALLÍ HO TENS : SCAM
         </a>
 
         <span class="info-trigger" data-src="tracklists/RF004_ALLI_HO_TENS.txt">[info]</span>
@@ -194,7 +194,7 @@
     <div>
 
         <a href="#" id="rf005" class="transmission">
-            ▶ HASTA LUEGO JAVIER : CAP. I ~ (L(A)) CORUÑA
+            HASTA LUEGO JAVIER : CAP. I ~ (L(A)) CORUÑA
         </a>
 
         <span class="info-trigger" data-src="tracklists/RF005_CORUNA.txt">[info]</span>
@@ -214,7 +214,7 @@
     <div>
 
         <a href="#" id="rf006" class="transmission">
-            ▶ DJ GUANTAZO : OH THIS THINGS ON ALRIGHT (WHOSE GONNA FILL THEIR SHOES)
+            DJ GUANTAZO : OH THIS THINGS ON ALRIGHT (WHOSE GONNA FILL THEIR SHOES)
         </a>
 
         <span class="info-trigger" data-src="tracklists/RF006_FILL_SHOES.txt">[info]</span>
@@ -234,7 +234,7 @@
     <div>
 
         <a href="#" id="rf007" class="transmission">
-            ▶ ALLÍ HO TENS : BIRRAS AMB AMICS
+            ALLÍ HO TENS : BIRRAS AMB AMICS
         </a>
 
         <span class="info-trigger" data-src="tracklists/RF007_ALLI_HO_TENS.txt">[info]</span>
@@ -254,7 +254,7 @@
     <div>
 
         <a href="#" id="rf008" class="transmission">
-            ▶ DJ GUANTAZO : SHOUTS OUT TA MY BOX FAN
+            DJ GUANTAZO : SHOUTS OUT TA MY BOX FAN
         </a>
 
         <span class="info-trigger" data-src="tracklists/RF008_BOX_FAN.txt">[info]</span>
@@ -274,7 +274,7 @@
     <div>
 
         <a href="#" id="rf009" class="transmission">
-            ▶ UNDERRATED - PUNK
+            UNDERRATED - PUNK
         </a>
 
         <span class="info-trigger" data-src="tracklists/RF009_UNDERRATED_PUNK.txt">[info]</span>
@@ -294,7 +294,7 @@
     <div>
 
         <a href="#" id="rf010" class="transmission">
-            ▶ ALLÍ HO TENS : DREAMS
+            ALLÍ HO TENS : DREAMS
         </a>
 
         <span class="info-trigger" data-src="tracklists/RF010_DREAMS.txt">[info]</span>
@@ -314,10 +314,38 @@
     <div>
 
         <a href="#" id="rf011" class="transmission">
-            ▶ DAGGERS DRAWN AT INSURRECTION'S FAILING LIGHT BROUGHT TO YOU BY DOUGIE
+            DAGGERS DRAWN AT INSURRECTION'S FAILING LIGHT BROUGHT TO YOU BY DOUGIE
         </a>
 
         <span class="info-trigger" data-src="tracklists/RF011_DAGGERS_DRAWN.txt">[info]</span>
+
+    </div>
+
+</div>
+
+<div class="entry">
+
+    <span class="date">
+        2026.09.11.
+    </span>
+
+    <span class="rf-id">RF012</span>
+
+    <div>
+
+        <a href="#" id="rf012" class="transmission">
+            HASTA LUEGO JAVIER : ALACANT CON JOSE
+        </a>
+
+        <div class="parts-dropdown" id="rf012-dropdown">
+
+            <a href="#" id="rf012a" class="part-link">PARTE A</a>
+
+            <a href="#" id="rf012b" class="part-link">PARTE B</a>
+
+        </div>
+
+        <span class="info-trigger" data-src="tracklists/RF012_ALACANT.txt">[info]</span>
 
     </div>
 
@@ -505,15 +533,13 @@ function playPauseRF001(){
 
         showGlobalProgress();
 
-        rf001.textContent =
-        "▌▌ DJ GUANTAZO: IS THIS THING ON?";
+        rf001.classList.add("playing");
 
     }else{
 
         transmission001.pause();
 
-        rf001.textContent =
-        "▶ DJ GUANTAZO: IS THIS THING ON?";
+        rf001.classList.remove("playing");
     }
 }
 
@@ -528,8 +554,7 @@ transmission001.addEventListener("ended", function(){
 
     hideGlobalProgress();
 
-    rf001.textContent =
-    "▶ DJ GUANTAZO: IS THIS THING ON?";
+    rf001.classList.remove("playing");
 });
 transmission001.addEventListener(
     "timeupdate",
@@ -695,10 +720,10 @@ function playPauseRF002(){
     if(transmission002.paused){
         transmission002.play();
         showGlobalProgress();
-        rf002Link.textContent = "▌▌ HASTA LUEGO JAVIER";
+        rf002Link.classList.add("playing");
     } else {
         transmission002.pause();
-        rf002Link.textContent = "▶ HASTA LUEGO JAVIER";
+        rf002Link.classList.remove("playing");
     }
 }
 
@@ -709,7 +734,7 @@ rf002Link.addEventListener("click", function(e){
 
 transmission002.addEventListener("ended", function(){
     hideGlobalProgress();
-    rf002Link.textContent = "▶ HASTA LUEGO JAVIER";
+    rf002Link.classList.remove("playing");
     rf002Entry.style.transition = "opacity 2s";
     rf002Entry.style.opacity = "0";
     setTimeout(function(){
@@ -737,10 +762,10 @@ function playPauseRF003(){
     if(transmission003.paused){
         transmission003.play();
         showGlobalProgress();
-        rf003Link.textContent = "▌▌ COWBOY LOVE";
+        rf003Link.classList.add("playing");
     } else {
         transmission003.pause();
-        rf003Link.textContent = "▶ COWBOY LOVE";
+        rf003Link.classList.remove("playing");
     }
 }
 
@@ -751,7 +776,7 @@ rf003Link.addEventListener("click", function(e){
 
 transmission003.addEventListener("ended", function(){
     hideGlobalProgress();
-    rf003Link.textContent = "▶ COWBOY LOVE";
+    rf003Link.classList.remove("playing");
 });
 
 transmission003.addEventListener("timeupdate", function(){
@@ -772,10 +797,10 @@ function playPauseRF004(){
     if(transmission004.paused){
         transmission004.play();
         showGlobalProgress();
-        rf004Link.textContent = "▌▌ ALLÍ HO TENS : SCAM";
+        rf004Link.classList.add("playing");
     } else {
         transmission004.pause();
-        rf004Link.textContent = "▶ ALLÍ HO TENS : SCAM";
+        rf004Link.classList.remove("playing");
     }
 }
 
@@ -786,7 +811,7 @@ rf004Link.addEventListener("click", function(e){
 
 transmission004.addEventListener("ended", function(){
     hideGlobalProgress();
-    rf004Link.textContent = "▶ ALLÍ HO TENS : SCAM";
+    rf004Link.classList.remove("playing");
 });
 
 transmission004.addEventListener("timeupdate", function(){
@@ -807,10 +832,10 @@ function playPauseRF005(){
     if(transmission005.paused){
         transmission005.play();
         showGlobalProgress();
-        rf005Link.textContent = "▌▌ HASTA LUEGO JAVIER : CAP. I ~ (L(A)) CORUÑA";
+        rf005Link.classList.add("playing");
     } else {
         transmission005.pause();
-        rf005Link.textContent = "▶ HASTA LUEGO JAVIER : CAP. I ~ (L(A)) CORUÑA";
+        rf005Link.classList.remove("playing");
     }
 }
 
@@ -821,7 +846,7 @@ rf005Link.addEventListener("click", function(e){
 
 transmission005.addEventListener("ended", function(){
     hideGlobalProgress();
-    rf005Link.textContent = "▶ HASTA LUEGO JAVIER : CAP. I ~ (L(A)) CORUÑA";
+    rf005Link.classList.remove("playing");
 });
 
 transmission005.addEventListener("timeupdate", function(){
@@ -842,10 +867,10 @@ function playPauseRF006(){
     if(transmission006.paused){
         transmission006.play();
         showGlobalProgress();
-        rf006Link.textContent = "▌▌ DJ GUANTAZO : OH THIS THINGS ON ALRIGHT (WHOSE GONNA FILL THEIR SHOES?)";
+        rf006Link.classList.add("playing");
     } else {
         transmission006.pause();
-        rf006Link.textContent = "▶ DJ GUANTAZO : OH THIS THINGS ON ALRIGHT (WHOSE GONNA FILL THEIR SHOES?)";
+        rf006Link.classList.remove("playing");
     }
 }
 
@@ -856,7 +881,7 @@ rf006Link.addEventListener("click", function(e){
 
 transmission006.addEventListener("ended", function(){
     hideGlobalProgress();
-    rf006Link.textContent = "▶ DJ GUANTAZO : OH THIS THINGS ON ALRIGHT (WHOSE GONNA FILL THEIR SHOES?)";
+    rf006Link.classList.remove("playing");
 });
 
 transmission006.addEventListener("timeupdate", function(){
@@ -877,10 +902,10 @@ function playPauseRF007(){
     if(transmission007.paused){
         transmission007.play();
         showGlobalProgress();
-        rf007Link.textContent = "▌▌ ALLÍ HO TENS : BIRRAS AMB AMICS";
+        rf007Link.classList.add("playing");
     } else {
         transmission007.pause();
-        rf007Link.textContent = "▶ ALLÍ HO TENS : BIRRAS AMB AMICS";
+        rf007Link.classList.remove("playing");
     }
 }
 
@@ -891,7 +916,7 @@ rf007Link.addEventListener("click", function(e){
 
 transmission007.addEventListener("ended", function(){
     hideGlobalProgress();
-    rf007Link.textContent = "▶ ALLÍ HO TENS : BIRRAS AMB AMICS";
+    rf007Link.classList.remove("playing");
 });
 
 transmission007.addEventListener("timeupdate", function(){
@@ -912,10 +937,10 @@ function playPauseRF008(){
     if(transmission008.paused){
         transmission008.play();
         showGlobalProgress();
-        rf008Link.textContent = "▌▌ DJ GUANTAZO : SHOUTS OUT TA MY BOX FAN";
+        rf008Link.classList.add("playing");
     } else {
         transmission008.pause();
-        rf008Link.textContent = "▶ DJ GUANTAZO : SHOUTS OUT TA MY BOX FAN";
+        rf008Link.classList.remove("playing");
     }
 }
 
@@ -926,7 +951,7 @@ rf008Link.addEventListener("click", function(e){
 
 transmission008.addEventListener("ended", function(){
     hideGlobalProgress();
-    rf008Link.textContent = "▶ DJ GUANTAZO : SHOUTS OUT TA MY BOX FAN";
+    rf008Link.classList.remove("playing");
 });
 
 transmission008.addEventListener("timeupdate", function(){
@@ -947,10 +972,10 @@ function playPauseRF009(){
     if(transmission009.paused){
         transmission009.play();
         showGlobalProgress();
-        rf009Link.textContent = "▌▌ UNDERRATED - PUNK";
+        rf009Link.classList.add("playing");
     } else {
         transmission009.pause();
-        rf009Link.textContent = "▶ UNDERRATED - PUNK";
+        rf009Link.classList.remove("playing");
     }
 }
 
@@ -961,7 +986,7 @@ rf009Link.addEventListener("click", function(e){
 
 transmission009.addEventListener("ended", function(){
     hideGlobalProgress();
-    rf009Link.textContent = "▶ UNDERRATED - PUNK";
+    rf009Link.classList.remove("playing");
 });
 
 transmission009.addEventListener("timeupdate", function(){
@@ -982,10 +1007,10 @@ function playPauseRF010(){
     if(transmission010.paused){
         transmission010.play();
         showGlobalProgress();
-        rf010Link.textContent = "▌▌ ALLÍ HO TENS : DREAMS";
+        rf010Link.classList.add("playing");
     } else {
         transmission010.pause();
-        rf010Link.textContent = "▶ ALLÍ HO TENS : DREAMS";
+        rf010Link.classList.remove("playing");
     }
 }
 
@@ -996,7 +1021,7 @@ rf010Link.addEventListener("click", function(e){
 
 transmission010.addEventListener("ended", function(){
     hideGlobalProgress();
-    rf010Link.textContent = "▶ ALLÍ HO TENS : DREAMS";
+    rf010Link.classList.remove("playing");
 });
 
 transmission010.addEventListener("timeupdate", function(){
@@ -1017,10 +1042,10 @@ function playPauseRF011(){
     if(transmission011.paused){
         transmission011.play();
         showGlobalProgress();
-        rf011Link.textContent = "▌▌ DAGGERS DRAWN AT INSURRECTION'S FAILING LIGHT BROUGHT TO YOU BY DOUGIE";
+        rf011Link.classList.add("playing");
     } else {
         transmission011.pause();
-        rf011Link.textContent = "▶ DAGGERS DRAWN AT INSURRECTION'S FAILING LIGHT BROUGHT TO YOU BY DOUGIE";
+        rf011Link.classList.remove("playing");
     }
 }
 
@@ -1031,11 +1056,76 @@ rf011Link.addEventListener("click", function(e){
 
 transmission011.addEventListener("ended", function(){
     hideGlobalProgress();
-    rf011Link.textContent = "▶ DAGGERS DRAWN AT INSURRECTION'S FAILING LIGHT BROUGHT TO YOU BY DOUGIE";
+    rf011Link.classList.remove("playing");
 });
 
 transmission011.addEventListener("timeupdate", function(){
     updateGlobalProgress(transmission011);
+});
+
+/* -------------------- */
+/* RF012 PLAYER */
+/* -------------------- */
+
+const RF012_TITLE = "HASTA LUEGO JAVIER : ALACANT CON JOSE";
+
+const transmission012a = new Audio("audio/RF012_ALACANT_A.mp3");
+const transmission012b = new Audio("audio/RF012_ALACANT_B.mp3");
+
+const rf012Link     = document.getElementById("rf012");
+const rf012Dropdown = document.getElementById("rf012-dropdown");
+const rf012aLink    = document.getElementById("rf012a");
+const rf012bLink    = document.getElementById("rf012b");
+
+function playPauseRF012Part(transmission, link, partLabel){
+    activeTransmission = transmission;
+    activeToggle = function(){
+        playPauseRF012Part(transmission, link, partLabel);
+    };
+
+    if(transmission.paused){
+        transmission.play();
+        showGlobalProgress();
+        link.classList.add("playing");
+        rf012Link.classList.add("playing");
+    } else {
+        transmission.pause();
+        link.classList.remove("playing");
+        rf012Link.classList.remove("playing");
+    }
+}
+
+rf012Link.addEventListener("click", function(e){
+    e.preventDefault();
+    rf012Dropdown.classList.toggle("open");
+});
+
+rf012aLink.addEventListener("click", function(e){
+    e.preventDefault();
+    playPauseRF012Part(transmission012a, rf012aLink, "PARTE A");
+});
+
+rf012bLink.addEventListener("click", function(e){
+    e.preventDefault();
+    playPauseRF012Part(transmission012b, rf012bLink, "PARTE B");
+});
+
+transmission012a.addEventListener("ended", function(){
+    hideGlobalProgress();
+    rf012aLink.classList.remove("playing");
+    rf012Link.classList.remove("playing");
+});
+transmission012a.addEventListener("timeupdate", function(){
+    updateGlobalProgress(transmission012a);
+});
+
+transmission012b.addEventListener("ended", function(){
+    hideGlobalProgress();
+    rf012bLink.classList.remove("playing");
+    rf012Link.classList.remove("playing");
+});
+transmission012b.addEventListener("timeupdate", function(){
+    updateGlobalProgress(transmission012b);
 });
 
 /* -------------------- */
