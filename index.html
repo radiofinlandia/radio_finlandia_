@@ -407,6 +407,26 @@
 
 </div>
 
+<div class="entry">
+
+    <span class="date">
+        2026.09.26.
+    </span>
+
+    <span class="rf-id">RF013</span>
+
+    <div>
+
+        <a href="#" id="rf013" class="transmission">
+            SMOOOOOOTH
+        </a>
+
+        <span class="info-trigger" data-src="tracklists/RF013_SMOOOOOOTH.txt">[info]</span>
+
+    </div>
+
+</div>
+
 </section>
 
 <script>
@@ -1303,6 +1323,41 @@ transmission012b.addEventListener("timeupdate", function(){
 });
 
 /* -------------------- */
+/* RF013 PLAYER */
+/* -------------------- */
+
+const transmission013 = new Audio("audio/RF013_SMOOTH.mp3");
+const rf013Link        = document.getElementById("rf013");
+
+function playPauseRF013(){
+    activeTransmission = transmission013;
+    activeToggle = playPauseRF013;
+
+    if(transmission013.paused){
+        transmission013.play();
+        showGlobalProgress();
+        rf013Link.classList.add("playing");
+    } else {
+        transmission013.pause();
+        rf013Link.classList.remove("playing");
+    }
+}
+
+rf013Link.addEventListener("click", function(e){
+    e.preventDefault();
+    playPauseRF013();
+});
+
+transmission013.addEventListener("ended", function(){
+    hideGlobalProgress();
+    rf013Link.classList.remove("playing");
+});
+
+transmission013.addEventListener("timeupdate", function(){
+    updateGlobalProgress(transmission013);
+});
+
+/* -------------------- */
 /* MOBILE PLAYER LABELS */
 /* -------------------- */
 
@@ -1319,7 +1374,8 @@ const transmissionLabels = new Map([
     [transmission010, rf010Link.textContent.trim()],
     [transmission011, rf011Link.textContent.trim()],
     [transmission012a, RF012_TITLE + " — PARTE A"],
-    [transmission012b, RF012_TITLE + " — PARTE B"]
+    [transmission012b, RF012_TITLE + " — PARTE B"],
+    [transmission013, rf013Link.textContent.trim()]
 ]);
 
 /* -------------------- */
