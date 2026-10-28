@@ -427,6 +427,26 @@
 
 </div>
 
+<div class="entry">
+
+    <span class="date">
+        2026.10.28.
+    </span>
+
+    <span class="rf-id">RF014</span>
+
+    <div>
+
+        <a href="#" id="rf014" class="transmission">
+            WALKIN' THRU THE CITY: AUSTIN WALKS HIS ANXIETY AND TDAH DOWN CARRER DE SANTS SOME CAP DE SETMANA
+        </a>
+
+        <span class="info-trigger" data-src="tracklists/RF014_WALKIN_THRU.txt">[info]</span>
+
+    </div>
+
+</div>
+
 </section>
 
 <script>
@@ -1358,6 +1378,41 @@ transmission013.addEventListener("timeupdate", function(){
 });
 
 /* -------------------- */
+/* RF014 PLAYER */
+/* -------------------- */
+
+const transmission014 = new Audio("audio/RF014_WALKIN_THRU.mp3");
+const rf014Link        = document.getElementById("rf014");
+
+function playPauseRF014(){
+    activeTransmission = transmission014;
+    activeToggle = playPauseRF014;
+
+    if(transmission014.paused){
+        transmission014.play();
+        showGlobalProgress();
+        rf014Link.classList.add("playing");
+    } else {
+        transmission014.pause();
+        rf014Link.classList.remove("playing");
+    }
+}
+
+rf014Link.addEventListener("click", function(e){
+    e.preventDefault();
+    playPauseRF014();
+});
+
+transmission014.addEventListener("ended", function(){
+    hideGlobalProgress();
+    rf014Link.classList.remove("playing");
+});
+
+transmission014.addEventListener("timeupdate", function(){
+    updateGlobalProgress(transmission014);
+});
+
+/* -------------------- */
 /* MOBILE PLAYER LABELS */
 /* -------------------- */
 
@@ -1375,7 +1430,8 @@ const transmissionLabels = new Map([
     [transmission011, rf011Link.textContent.trim()],
     [transmission012a, RF012_TITLE + " — PARTE A"],
     [transmission012b, RF012_TITLE + " — PARTE B"],
-    [transmission013, rf013Link.textContent.trim()]
+    [transmission013, rf013Link.textContent.trim()],
+    [transmission014, rf014Link.textContent.trim()]
 ]);
 
 /* -------------------- */
