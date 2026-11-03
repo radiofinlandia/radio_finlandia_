@@ -447,6 +447,26 @@
 
 </div>
 
+<div class="entry">
+
+    <span class="date">
+        2026.11.03.
+    </span>
+
+    <span class="rf-id">RF015</span>
+
+    <div>
+
+        <a href="#" id="rf015" class="transmission">
+            DYNAMIC DUO RETURNS
+        </a>
+
+        <span class="info-trigger" data-src="tracklists/RF015_NICK_FIRST.txt">[info]</span>
+
+    </div>
+
+</div>
+
 </section>
 
 <script>
@@ -1413,6 +1433,41 @@ transmission014.addEventListener("timeupdate", function(){
 });
 
 /* -------------------- */
+/* RF015 PLAYER */
+/* -------------------- */
+
+const transmission015 = new Audio("audio/RF015_NICK_FIRST.mp3");
+const rf015Link        = document.getElementById("rf015");
+
+function playPauseRF015(){
+    activeTransmission = transmission015;
+    activeToggle = playPauseRF015;
+
+    if(transmission015.paused){
+        transmission015.play();
+        showGlobalProgress();
+        rf015Link.classList.add("playing");
+    } else {
+        transmission015.pause();
+        rf015Link.classList.remove("playing");
+    }
+}
+
+rf015Link.addEventListener("click", function(e){
+    e.preventDefault();
+    playPauseRF015();
+});
+
+transmission015.addEventListener("ended", function(){
+    hideGlobalProgress();
+    rf015Link.classList.remove("playing");
+});
+
+transmission015.addEventListener("timeupdate", function(){
+    updateGlobalProgress(transmission015);
+});
+
+/* -------------------- */
 /* MOBILE PLAYER LABELS */
 /* -------------------- */
 
@@ -1431,7 +1486,8 @@ const transmissionLabels = new Map([
     [transmission012a, RF012_TITLE + " — PARTE A"],
     [transmission012b, RF012_TITLE + " — PARTE B"],
     [transmission013, rf013Link.textContent.trim()],
-    [transmission014, rf014Link.textContent.trim()]
+    [transmission014, rf014Link.textContent.trim()],
+    [transmission015, rf015Link.textContent.trim()]
 ]);
 
 /* -------------------- */
