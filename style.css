@@ -21,6 +21,8 @@ body{
 
     padding:20px;
 
+    padding-bottom:96px;
+
     overflow-x:hidden;
 
     position:relative;
@@ -495,7 +497,7 @@ header{
 }
 
 /* -------------------- */
-/* GLOBAL PROGRESS BAR */
+/* PLAYER BAR */
 /* -------------------- */
 
 .global-progress{
@@ -506,9 +508,20 @@ header{
     right:0;
     bottom:0;
 
-    height:50px;
+    height:56px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:0 16px;
 
     background:rgba(255,255,255,.06);
+
+    -webkit-backdrop-filter:blur(10px);
+    backdrop-filter:blur(10px);
 
     z-index:150;
 
@@ -524,6 +537,140 @@ header{
     opacity:1;
 
     pointer-events:auto;
+}
+
+/* -------------------- */
+/* PLAYER BUTTONS */
+/* -------------------- */
+
+.player-btn{
+
+    appearance:none;
+    -webkit-appearance:none;
+
+    flex:none;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:0;
+
+    background:none;
+
+    border:none;
+
+    color:#efefef;
+
+    cursor:pointer;
+
+    -webkit-tap-highlight-color:transparent;
+
+    touch-action:manipulation;
+}
+
+.skip-btn{
+
+    width:34px;
+    height:34px;
+
+    border-radius:50%;
+
+    border:1.5px solid rgba(239,239,239,.55);
+
+    font-family:"Courier New",monospace;
+
+    font-size:11px;
+
+    font-weight:bold;
+
+    letter-spacing:0;
+
+    transition:border-color .15s, background .15s, transform .1s;
+}
+
+.skip-btn:hover{
+
+    border-color:#efefef;
+
+    background:rgba(255,255,255,.08);
+}
+
+.skip-btn:active{
+
+    transform:scale(.92);
+}
+
+.global-progress-playicon{
+
+    width:40px;
+    height:40px;
+}
+
+.global-progress-playicon::before{
+
+    content:"";
+
+    width:0;
+    height:0;
+
+    border-style:solid;
+
+    border-width:7px 0 7px 11px;
+
+    border-color:transparent transparent transparent #efefef;
+}
+
+.global-progress.is-playing .global-progress-playicon::before{
+
+    width:11px;
+    height:14px;
+
+    border-style:none;
+
+    background:
+        linear-gradient(#efefef,#efefef) 0 0/4px 14px no-repeat,
+        linear-gradient(#efefef,#efefef) 7px 0/4px 14px no-repeat;
+}
+
+.global-progress-title{
+
+    flex:0 1 240px;
+
+    min-width:0;
+
+    font-size:13px;
+
+    letter-spacing:.5px;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+.global-progress-time{
+
+    flex:none;
+
+    padding:2px 8px;
+
+    background:rgba(0,0,0,.4);
+
+    color:#efefef;
+
+    font-family:"Courier New",monospace;
+
+    font-size:12px;
+
+    letter-spacing:1px;
+
+    white-space:nowrap;
+
+    font-variant-numeric:tabular-nums;
 }
 
 /* -------------------- */
@@ -565,26 +712,101 @@ header{
 }
 
 /* -------------------- */
-/* MINI-BAR FADER + INFO */
+/* SCRUBBER (shared behaviour) */
 /* -------------------- */
 
-.global-progress-scrub{
-
-    position:absolute;
-
-    inset:0;
+.scrubber{
 
     cursor:pointer;
 
     touch-action:none;
+
+    -webkit-user-select:none;
+    user-select:none;
+
+    -webkit-tap-highlight-color:transparent;
+}
+
+.scrub-cap{
+
+    transition:left .1s linear, scale .12s ease;
+}
+
+.scrubber.dragging .scrub-fill,
+.scrubber.dragging .scrub-cap{
+
+    transition:scale .12s ease;
+}
+
+.scrubber.dragging .scrub-cap{
+
+    scale:1.18;
+}
+
+.scrub-bubble{
+
+    position:absolute;
+
+    left:0;
+
+    bottom:calc(100% + 16px);
+
+    transform:translateX(-50%);
+
+    padding:3px 7px;
+
+    background:#efefef;
+
+    color:#0c0c0c;
+
+    font-family:"Courier New",monospace;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+
+    border-radius:3px;
+
+    white-space:nowrap;
+
+    font-variant-numeric:tabular-nums;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:opacity .15s;
+}
+
+.scrubber.dragging .scrub-bubble,
+.scrubber.hovering .scrub-bubble{
+
+    opacity:1;
+}
+
+/* -------------------- */
+/* MINI-BAR FADER */
+/* -------------------- */
+
+.global-progress-scrub{
+
+    position:relative;
+
+    flex:1;
+
+    align-self:stretch;
+
+    min-width:80px;
 }
 
 .global-progress-rail{
 
     position:absolute;
 
-    left:16px;
-    right:16px;
+    left:8px;
+    right:8px;
 
     top:50%;
 
@@ -630,118 +852,6 @@ header{
     height:24px;
 
     pointer-events:none;
-
-    transition:left .1s linear;
-}
-
-.global-progress-info{
-
-    position:absolute;
-
-    left:0;
-    right:0;
-
-    top:50%;
-
-    transform:translateY(-50%);
-
-    display:flex;
-
-    align-items:center;
-
-    padding:0 16px;
-
-    pointer-events:none;
-}
-
-.global-progress-time{
-
-    position:relative;
-
-    margin-left:auto;
-
-    padding:2px 8px;
-
-    background:rgba(0,0,0,.4);
-
-    color:#efefef;
-
-    font-family:"Courier New",monospace;
-
-    font-size:12px;
-
-    letter-spacing:1px;
-
-    pointer-events:none;
-}
-
-.global-progress-title{
-
-    display:none;
-
-    flex:1;
-
-    min-width:0;
-
-    margin-right:16px;
-
-    font-size:13px;
-
-    letter-spacing:.5px;
-
-    white-space:nowrap;
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
-
-    pointer-events:none;
-}
-
-.global-progress-playicon{
-
-    display:none;
-
-    align-items:center;
-
-    justify-content:center;
-
-    flex:none;
-
-    width:40px;
-    height:40px;
-
-    margin-right:6px;
-
-    cursor:pointer;
-
-    pointer-events:auto;
-}
-
-.global-progress-playicon::before{
-
-    content:"";
-
-    width:0;
-    height:0;
-
-    border-style:solid;
-
-    border-width:7px 0 7px 11px;
-
-    border-color:transparent transparent transparent #efefef;
-}
-
-.global-progress.is-playing .global-progress-playicon::before{
-
-    width:11px;
-    height:14px;
-
-    border-style:none;
-
-    background:
-        linear-gradient(#efefef,#efefef) 0 0/4px 14px no-repeat,
-        linear-gradient(#efefef,#efefef) 7px 0/4px 14px no-repeat;
 }
 
 /* -------------------- */
@@ -846,6 +956,8 @@ header{
 
     padding:20px 32px;
 
+    padding-bottom:calc(20px + env(safe-area-inset-bottom,0px));
+
     gap:40px;
 }
 
@@ -876,6 +988,27 @@ header{
     padding:12px 18px;
 }
 
+.full-player-controls{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:28px;
+}
+
+.skip-btn-lg{
+
+    width:56px;
+    height:56px;
+
+    border-width:2px;
+
+    font-size:15px;
+}
+
 .full-player-playbtn{
 
     flex:none;
@@ -901,6 +1034,10 @@ header{
     justify-content:center;
 
     cursor:pointer;
+
+    -webkit-tap-highlight-color:transparent;
+
+    touch-action:manipulation;
 }
 
 .full-player-playicon{
@@ -948,11 +1085,7 @@ header{
 
     width:100%;
 
-    height:44px;
-
-    cursor:pointer;
-
-    touch-action:none;
+    height:56px;
 }
 
 .full-player-rail{
@@ -1004,8 +1137,6 @@ header{
     height:40px;
 
     pointer-events:none;
-
-    transition:left .1s linear;
 }
 
 .full-player-progress-cap .fader-cap-body{
@@ -1013,6 +1144,13 @@ header{
     border-radius:9px;
 
     transform:perspective(70px) rotateY(22deg);
+}
+
+.full-player-progress .scrub-bubble{
+
+    bottom:calc(100% + 26px);
+
+    font-size:14px;
 }
 
 .full-player-times{
@@ -1030,6 +1168,8 @@ header{
     letter-spacing:1px;
 
     opacity:.6;
+
+    font-variant-numeric:tabular-nums;
 }
 
 /* -------------------- */
@@ -1256,23 +1396,35 @@ header{
 
     .global-progress{
 
+        display:grid;
+
+        grid-template-columns:auto minmax(0,1fr) auto;
+
+        grid-template-rows:40px 44px;
+
+        grid-template-areas:
+            "scrub scrub scrub"
+            "play  title time";
+
         height:84px;
+
+        padding:0;
+
+        gap:0;
+    }
+
+    .global-progress .skip-btn{
+        display:none;
     }
 
     .global-progress-scrub{
 
-        inset:auto;
+        grid-area:scrub;
 
-        top:0;
-        left:0;
-        right:0;
-
-        height:40px;
+        min-width:0;
     }
 
     .global-progress-rail{
-
-        top:20px;
 
         left:18px;
         right:18px;
@@ -1293,24 +1445,35 @@ header{
         transform:perspective(56px) rotateY(22deg);
     }
 
-    .global-progress-info{
+    .global-progress-playicon{
 
-        top:auto;
-        bottom:0;
+        grid-area:play;
 
-        transform:none;
+        margin-left:8px;
 
-        height:44px;
-
-        pointer-events:auto;
+        margin-right:6px;
     }
 
     .global-progress-title{
-        display:block;
+
+        grid-area:title;
+
+        align-self:center;
+
+        margin-right:12px;
+
+        cursor:pointer;
     }
 
-    .global-progress-playicon{
-        display:flex;
+    .global-progress-time{
+
+        grid-area:time;
+
+        align-self:center;
+
+        margin-right:16px;
+
+        cursor:pointer;
     }
 
     .full-player{

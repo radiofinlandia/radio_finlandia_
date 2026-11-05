@@ -16,22 +16,27 @@
 
 <div class="global-progress" id="global-progress">
 
-    <div class="global-progress-scrub" id="global-progress-scrub">
-        <div class="global-progress-rail" id="global-progress-rail">
-            <div class="global-progress-fill" id="global-progress-fill"></div>
-            <div class="global-progress-cap" id="global-progress-cap">
+    <button type="button" class="player-btn skip-btn" data-skip="-15" aria-label="atrás 15 segundos">&minus;15</button>
+
+    <button type="button" class="player-btn global-progress-playicon" id="global-progress-playicon" aria-label="play / pausa"></button>
+
+    <button type="button" class="player-btn skip-btn" data-skip="15" aria-label="adelante 15 segundos">+15</button>
+
+    <div class="global-progress-title" id="global-progress-title"></div>
+
+    <div class="global-progress-scrub scrubber" id="global-progress-scrub">
+        <div class="global-progress-rail scrub-rail">
+            <div class="global-progress-fill scrub-fill"></div>
+            <div class="global-progress-cap scrub-cap">
                 <div class="fader-cap-body">
                     <span class="fader-grip"></span>
                 </div>
             </div>
+            <div class="scrub-bubble"></div>
         </div>
     </div>
 
-    <div class="global-progress-info" id="global-progress-info">
-        <div class="global-progress-title" id="global-progress-title"></div>
-        <span class="global-progress-playicon" id="global-progress-playicon"></span>
-        <div class="global-progress-time" id="global-progress-time">0:00</div>
-    </div>
+    <div class="global-progress-time" id="global-progress-time">0:00</div>
 
 </div>
 
@@ -50,19 +55,28 @@
 
         <div class="full-player-title" id="full-player-title-full"></div>
 
-        <button class="full-player-playbtn" id="full-player-playbtn" aria-label="play / pausa">
-            <span class="full-player-playicon" id="full-player-playicon"></span>
-        </button>
+        <div class="full-player-controls">
+
+            <button type="button" class="player-btn skip-btn skip-btn-lg" data-skip="-15" aria-label="atrás 15 segundos">&minus;15</button>
+
+            <button type="button" class="full-player-playbtn" id="full-player-playbtn" aria-label="play / pausa">
+                <span class="full-player-playicon"></span>
+            </button>
+
+            <button type="button" class="player-btn skip-btn skip-btn-lg" data-skip="15" aria-label="adelante 15 segundos">+15</button>
+
+        </div>
 
         <div class="full-player-progress-wrap">
-            <div class="full-player-progress" id="full-player-progress">
-                <div class="full-player-rail">
-                    <div class="full-player-progress-fill" id="full-player-progress-fill"></div>
-                </div>
-                <div class="full-player-progress-cap" id="full-player-progress-cap">
-                    <div class="fader-cap-body">
-                        <span class="fader-grip"></span>
+            <div class="full-player-progress scrubber" id="full-player-progress">
+                <div class="full-player-rail scrub-rail">
+                    <div class="full-player-progress-fill scrub-fill"></div>
+                    <div class="full-player-progress-cap scrub-cap">
+                        <div class="fader-cap-body">
+                            <span class="fader-grip"></span>
+                        </div>
                     </div>
+                    <div class="scrub-bubble"></div>
                 </div>
             </div>
             <div class="full-player-times">
@@ -171,11 +185,9 @@
 
     <div>
 
-        <a href="#" id="rf001" class="transmission">
+        <a href="#" id="rf001" data-audio="audio/RF001.mp3" class="transmission">
             DJ GUANTAZO: IS THIS THING ON?
         </a>
-
-        <span class="info-trigger" data-src="tracklists/RF001.txt">[info]</span>
 
     </div>
 
@@ -189,11 +201,9 @@
 
     <div>
 
-        <a href="#" id="rf002" class="transmission transmission-secret">
+        <a href="#" id="rf002" data-audio="audio/RF002_PILOTO.mp3" class="transmission transmission-secret">
             HASTA LUEGO JAVIER
         </a>
-
-        <span class="info-trigger" data-src="tracklists/RF002_PILOTO.txt">[info]</span>
 
     </div>
 
@@ -209,11 +219,9 @@
 
     <div>
 
-        <a href="#" id="rf003" class="transmission">
+        <a href="#" id="rf003" data-audio="audio/RF003_COWBOY_LOVE.mp3" class="transmission">
             COWBOY LOVE
         </a>
-
-        <span class="info-trigger" data-src="tracklists/RF003_COWBOY_LOVE.txt">[info]</span>
 
     </div>
 
@@ -229,7 +237,7 @@
 
     <div>
 
-        <a href="#" id="rf004" class="transmission">
+        <a href="#" id="rf004" data-audio="audio/RF004_ALLI_HO_TENS.mp3" class="transmission">
             ALLÍ HO TENS : SCAM
         </a>
 
@@ -249,11 +257,9 @@
 
     <div>
 
-        <a href="#" id="rf005" class="transmission">
+        <a href="#" id="rf005" data-audio="audio/RF005_CORUNA.mp3" class="transmission">
             HASTA LUEGO JAVIER : CAP. I ~ (L(A)) CORUÑA
         </a>
-
-        <span class="info-trigger" data-src="tracklists/RF005_CORUNA.txt">[info]</span>
 
     </div>
 
@@ -269,11 +275,9 @@
 
     <div>
 
-        <a href="#" id="rf006" class="transmission">
+        <a href="#" id="rf006" data-audio="audio/RF006_FILL_SHOES.mp3" class="transmission">
             DJ GUANTAZO : OH THIS THINGS ON ALRIGHT (WHOSE GONNA FILL THEIR SHOES)
         </a>
-
-        <span class="info-trigger" data-src="tracklists/RF006_FILL_SHOES.txt">[info]</span>
 
     </div>
 
@@ -289,7 +293,7 @@
 
     <div>
 
-        <a href="#" id="rf007" class="transmission">
+        <a href="#" id="rf007" data-audio="audio/RF007_ALLI_HO_TENS.mp3" class="transmission">
             ALLÍ HO TENS : BIRRAS AMB AMICS
         </a>
 
@@ -309,7 +313,7 @@
 
     <div>
 
-        <a href="#" id="rf008" class="transmission">
+        <a href="#" id="rf008" data-audio="audio/RF008_BOX_FAN.mp3" class="transmission">
             DJ GUANTAZO : SHOUTS OUT TA MY BOX FAN
         </a>
 
@@ -329,7 +333,7 @@
 
     <div>
 
-        <a href="#" id="rf009" class="transmission">
+        <a href="#" id="rf009" data-audio="audio/RF009_UNDERRATED_PUNK.mp3" class="transmission">
             UNDERRATED - PUNK
         </a>
 
@@ -349,7 +353,7 @@
 
     <div>
 
-        <a href="#" id="rf010" class="transmission">
+        <a href="#" id="rf010" data-audio="audio/RF010_DREAMS.mp3" class="transmission">
             ALLÍ HO TENS : DREAMS
         </a>
 
@@ -369,7 +373,7 @@
 
     <div>
 
-        <a href="#" id="rf011" class="transmission">
+        <a href="#" id="rf011" data-audio="audio/RF011_DAGGERS_DRAWN.mp3" class="transmission">
             DAGGERS DRAWN AT INSURRECTION'S FAILING LIGHT BROUGHT TO YOU BY DOUGIE
         </a>
 
@@ -395,9 +399,9 @@
 
         <div class="parts-dropdown" id="rf012-dropdown">
 
-            <a href="#" id="rf012a" class="part-link">PARTE A</a>
+            <a href="#" id="rf012a" data-audio="audio/RF012_ALACANT_A.mp3" data-parent="rf012" data-label="HASTA LUEGO JAVIER : ALACANT CON JOSE — PARTE A" class="part-link">PARTE A</a>
 
-            <a href="#" id="rf012b" class="part-link">PARTE B</a>
+            <a href="#" id="rf012b" data-audio="audio/RF012_ALACANT_B.mp3" data-parent="rf012" data-label="HASTA LUEGO JAVIER : ALACANT CON JOSE — PARTE B" class="part-link">PARTE B</a>
 
         </div>
 
@@ -417,7 +421,7 @@
 
     <div>
 
-        <a href="#" id="rf013" class="transmission">
+        <a href="#" id="rf013" data-audio="audio/RF013_SMOOTH.mp3" class="transmission">
             SMOOOOOOTH
         </a>
 
@@ -437,7 +441,7 @@
 
     <div>
 
-        <a href="#" id="rf014" class="transmission">
+        <a href="#" id="rf014" data-audio="audio/RF014_WALKIN_THRU.mp3" class="transmission">
             WALKIN' THRU THE CITY: AUSTIN WALKS HIS ANXIETY AND TDAH DOWN CARRER DE SANTS SOME CAP DE SETMANA
         </a>
 
@@ -457,11 +461,29 @@
 
     <div>
 
-        <a href="#" id="rf015" class="transmission">
+        <a href="#" id="rf015" data-audio="audio/RF015_NICK_FIRST.mp3" class="transmission">
             DYNAMIC DUO RETURNS
         </a>
 
         <span class="info-trigger" data-src="tracklists/RF015_NICK_FIRST.txt">[info]</span>
+
+    </div>
+
+</div>
+
+<div class="entry">
+
+    <span class="date">
+        2026.11.05.
+    </span>
+
+    <span class="rf-id">RF016</span>
+
+    <div>
+
+        <a href="#" id="rf016" data-audio="audio/RF016_ALBACETE.mp3" class="transmission">
+            HASTA LUEGO JAVIER : ALBACETE AMB SPECIAL GUEST
+        </a>
 
     </div>
 
@@ -535,269 +557,6 @@ memorySlots.forEach(function(slot, index){
 });
 
 /* -------------------- */
-/* GLOBAL PROGRESS BAR */
-/* -------------------- */
-
-const globalProgress     = document.getElementById("global-progress");
-const globalProgressScrub= document.getElementById("global-progress-scrub");
-const globalProgressRail = document.getElementById("global-progress-rail");
-const globalProgressFill = document.getElementById("global-progress-fill");
-const globalProgressCap  = document.getElementById("global-progress-cap");
-const globalProgressTime = document.getElementById("global-progress-time");
-const globalProgressTitle    = document.getElementById("global-progress-title");
-const globalProgressInfo     = document.getElementById("global-progress-info");
-const globalProgressPlayIcon = document.getElementById("global-progress-playicon");
-
-const fullPlayer             = document.getElementById("full-player");
-const fullPlayerMinimize     = document.getElementById("full-player-minimize");
-const fullPlayerTitle        = document.getElementById("full-player-title-full");
-const fullPlayerPlayBtn      = document.getElementById("full-player-playbtn");
-const fullPlayerProgress     = document.getElementById("full-player-progress");
-const fullPlayerProgressFill = document.getElementById("full-player-progress-fill");
-const fullPlayerProgressCap  = document.getElementById("full-player-progress-cap");
-const fullPlayerCurrent      = document.getElementById("full-player-current");
-const fullPlayerDuration     = document.getElementById("full-player-duration");
-
-let activeTransmission = null;
-let activeToggle       = null;
-let playIconInterval   = null;
-
-function isMobileView(){
-    return window.matchMedia("(max-width:640px)").matches;
-}
-
-function openFullPlayer(){
-    if(!activeTransmission) return;
-    fullPlayer.classList.add("open");
-}
-
-function closeFullPlayer(){
-    fullPlayer.classList.remove("open");
-}
-
-fullPlayerMinimize.addEventListener("click", function(e){
-    e.stopPropagation();
-    closeFullPlayer();
-});
-
-fullPlayerPlayBtn.addEventListener("click", function(){
-    if(activeToggle) activeToggle();
-});
-
-function formatTime(seconds){
-    seconds = Math.max(0, Math.floor(seconds || 0));
-    const m = Math.floor(seconds / 60);
-    const s = seconds % 60;
-    return m + ":" + (s < 10 ? "0" : "") + s;
-}
-
-function currentPlayingLabel(){
-    return activeTransmission ? (transmissionLabels.get(activeTransmission) || "") : "";
-}
-
-function syncPlayIcon(){
-    const playingNow = !!document.querySelector(".transmission.playing, .part-link.playing");
-    globalProgress.classList.toggle("is-playing", playingNow);
-    fullPlayer.classList.toggle("is-playing", playingNow);
-}
-
-function showGlobalProgress(){
-    globalProgress.classList.add("active");
-    globalProgressTitle.textContent = currentPlayingLabel();
-    fullPlayerTitle.textContent = currentPlayingLabel();
-    syncPlayIcon();
-    if(!playIconInterval) playIconInterval = setInterval(syncPlayIcon, 200);
-}
-
-function hideGlobalProgress(){
-    globalProgress.classList.remove("active", "is-playing");
-    closeFullPlayer();
-    fullPlayer.classList.remove("is-playing");
-    globalProgressFill.style.width = "0%";
-    globalProgressCap.style.left = "0%";
-    fullPlayerProgressFill.style.width = "0%";
-    fullPlayerProgressCap.style.left = "0%";
-    globalProgressTime.textContent = "0:00";
-    fullPlayerCurrent.textContent = "0:00";
-    fullPlayerDuration.textContent = "0:00";
-    globalProgressTitle.textContent = "";
-    fullPlayerTitle.textContent = "";
-    activeTransmission = null;
-    activeToggle = null;
-    if(playIconInterval){
-        clearInterval(playIconInterval);
-        playIconInterval = null;
-    }
-}
-
-function updateGlobalProgress(transmission){
-    if(transmission.duration){
-        const ratio = transmission.currentTime / transmission.duration;
-        globalProgressFill.style.width = ratio * 100 + "%";
-        globalProgressCap.style.left = ratio * 100 + "%";
-        fullPlayerProgressFill.style.width = ratio * 100 + "%";
-        fullPlayerProgressCap.style.left = ratio * 100 + "%";
-        fullPlayerDuration.textContent = formatTime(transmission.duration);
-    }
-    globalProgressTime.textContent = formatTime(transmission.currentTime);
-    fullPlayerCurrent.textContent = formatTime(transmission.currentTime);
-    const label = currentPlayingLabel();
-    globalProgressTitle.textContent = label;
-    fullPlayerTitle.textContent = label;
-}
-
-/* -------------------- */
-/* GLOBAL PROGRESS BAR SCRUBBING (fader) */
-/* -------------------- */
-
-let isScrubbing  = false;
-
-function seekFromClientX(clientX){
-    if(!activeTransmission || !activeTransmission.duration) return;
-    const rect  = globalProgressRail.getBoundingClientRect();
-    const ratio = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
-    activeTransmission.currentTime = ratio * activeTransmission.duration;
-    updateGlobalProgress(activeTransmission);
-}
-
-function scrubStart(clientX){
-    if(!activeTransmission) return;
-    isScrubbing = true;
-    seekFromClientX(clientX);
-}
-
-function scrubMove(clientX){
-    if(!isScrubbing) return;
-    seekFromClientX(clientX);
-}
-
-function scrubEnd(){
-    isScrubbing = false;
-}
-
-globalProgressScrub.addEventListener("mousedown", function(e){
-    scrubStart(e.clientX);
-});
-document.addEventListener("mousemove", function(e){
-    scrubMove(e.clientX);
-});
-document.addEventListener("mouseup", function(){
-    scrubEnd();
-});
-
-globalProgressScrub.addEventListener("touchstart", function(e){
-    scrubStart(e.touches[0].clientX);
-}, {passive:true});
-document.addEventListener("touchmove", function(e){
-    if(isScrubbing) scrubMove(e.touches[0].clientX);
-}, {passive:true});
-document.addEventListener("touchend", function(){
-    scrubEnd();
-});
-
-globalProgressPlayIcon.addEventListener("mousedown", function(e){
-    e.stopPropagation();
-});
-globalProgressPlayIcon.addEventListener("touchstart", function(e){
-    e.stopPropagation();
-}, {passive:true});
-globalProgressPlayIcon.addEventListener("click", function(e){
-    e.stopPropagation();
-    if(activeToggle) activeToggle();
-});
-
-globalProgressInfo.addEventListener("click", function(){
-    if(isMobileView()) openFullPlayer();
-});
-
-/* -------------------- */
-/* FULL PLAYER PROGRESS BAR SCRUBBING */
-/* -------------------- */
-
-let isScrubbingFull = false;
-
-function seekFromClientXOnFullBar(clientX){
-    if(!activeTransmission || !activeTransmission.duration) return;
-    const rect  = fullPlayerProgress.getBoundingClientRect();
-    const ratio = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
-    activeTransmission.currentTime = ratio * activeTransmission.duration;
-    updateGlobalProgress(activeTransmission);
-}
-
-fullPlayerProgress.addEventListener("mousedown", function(e){
-    isScrubbingFull = true;
-    seekFromClientXOnFullBar(e.clientX);
-});
-document.addEventListener("mousemove", function(e){
-    if(isScrubbingFull) seekFromClientXOnFullBar(e.clientX);
-});
-document.addEventListener("mouseup", function(){
-    isScrubbingFull = false;
-});
-
-fullPlayerProgress.addEventListener("touchstart", function(e){
-    isScrubbingFull = true;
-    seekFromClientXOnFullBar(e.touches[0].clientX);
-}, {passive:true});
-document.addEventListener("touchmove", function(e){
-    if(isScrubbingFull) seekFromClientXOnFullBar(e.touches[0].clientX);
-}, {passive:true});
-document.addEventListener("touchend", function(){
-    isScrubbingFull = false;
-});
-
-/* -------------------- */
-/* AUDIO */
-/* -------------------- */
-
-const transmission001 =
-new Audio("audio/RF001.mp3");
-
-const rf001 =
-document.getElementById("rf001");
-
-function playPauseRF001(){
-
-    activeTransmission = transmission001;
-    activeToggle = playPauseRF001;
-
-    if(transmission001.paused){
-
-        transmission001.play();
-
-        showGlobalProgress();
-
-        rf001.classList.add("playing");
-
-    }else{
-
-        transmission001.pause();
-
-        rf001.classList.remove("playing");
-    }
-}
-
-rf001.addEventListener("click", function(e){
-
-    e.preventDefault();
-
-    playPauseRF001();
-});
-
-transmission001.addEventListener("ended", function(){
-
-    hideGlobalProgress();
-
-    rf001.classList.remove("playing");
-});
-transmission001.addEventListener(
-    "timeupdate",
-    function(){
-        updateGlobalProgress(transmission001);
-    }
-);
-
-/* -------------------- */
 /* SPHERE EXPLOSION */
 /* -------------------- */
 
@@ -842,9 +601,6 @@ const terminalInput    = document.getElementById("terminal-input");
 const terminalInputRow = document.getElementById("terminal-input-row");
 const rfTrigger        = document.getElementById("rf-trigger");
 const rf002Entry       = document.getElementById("rf002-entry");
-const rf002Link        = document.getElementById("rf002");
-
-const transmission002  = new Audio("audio/RF002_PILOTO.mp3");
 
 const ACCESS_CODES = {
     "666": revealRF002
@@ -943,32 +699,7 @@ function revealRF002(){
     });
 }
 
-/* -------------------- */
-/* RF002 PLAYER */
-/* -------------------- */
-
-function playPauseRF002(){
-    activeTransmission = transmission002;
-    activeToggle = playPauseRF002;
-
-    if(transmission002.paused){
-        transmission002.play();
-        showGlobalProgress();
-        rf002Link.classList.add("playing");
-    } else {
-        transmission002.pause();
-        rf002Link.classList.remove("playing");
-    }
-}
-
-rf002Link.addEventListener("click", function(e){
-    e.preventDefault();
-    playPauseRF002();
-});
-
-transmission002.addEventListener("ended", function(){
-    hideGlobalProgress();
-    rf002Link.classList.remove("playing");
+function hideSecretEntry(){
     rf002Entry.style.transition = "opacity 2s";
     rf002Entry.style.opacity = "0";
     setTimeout(function(){
@@ -976,519 +707,7 @@ transmission002.addEventListener("ended", function(){
         rf002Entry.style.transition = "";
         rf002Entry.style.opacity = "";
     }, 2000);
-});
-
-transmission002.addEventListener("timeupdate", function(){
-    updateGlobalProgress(transmission002);
-});
-
-/* -------------------- */
-/* RF003 PLAYER */
-/* -------------------- */
-
-const transmission003 = new Audio("audio/RF003_COWBOY_LOVE.mp3");
-const rf003Link       = document.getElementById("rf003");
-
-function playPauseRF003(){
-    activeTransmission = transmission003;
-    activeToggle = playPauseRF003;
-
-    if(transmission003.paused){
-        transmission003.play();
-        showGlobalProgress();
-        rf003Link.classList.add("playing");
-    } else {
-        transmission003.pause();
-        rf003Link.classList.remove("playing");
-    }
 }
-
-rf003Link.addEventListener("click", function(e){
-    e.preventDefault();
-    playPauseRF003();
-});
-
-transmission003.addEventListener("ended", function(){
-    hideGlobalProgress();
-    rf003Link.classList.remove("playing");
-});
-
-transmission003.addEventListener("timeupdate", function(){
-    updateGlobalProgress(transmission003);
-});
-
-/* -------------------- */
-/* RF004 PLAYER */
-/* -------------------- */
-
-const transmission004 = new Audio("audio/RF004_ALLI_HO_TENS.mp3");
-const rf004Link       = document.getElementById("rf004");
-
-function playPauseRF004(){
-    activeTransmission = transmission004;
-    activeToggle = playPauseRF004;
-
-    if(transmission004.paused){
-        transmission004.play();
-        showGlobalProgress();
-        rf004Link.classList.add("playing");
-    } else {
-        transmission004.pause();
-        rf004Link.classList.remove("playing");
-    }
-}
-
-rf004Link.addEventListener("click", function(e){
-    e.preventDefault();
-    playPauseRF004();
-});
-
-transmission004.addEventListener("ended", function(){
-    hideGlobalProgress();
-    rf004Link.classList.remove("playing");
-});
-
-transmission004.addEventListener("timeupdate", function(){
-    updateGlobalProgress(transmission004);
-});
-
-/* -------------------- */
-/* RF005 PLAYER */
-/* -------------------- */
-
-const transmission005 = new Audio("audio/RF005_CORUNA.mp3");
-const rf005Link       = document.getElementById("rf005");
-
-function playPauseRF005(){
-    activeTransmission = transmission005;
-    activeToggle = playPauseRF005;
-
-    if(transmission005.paused){
-        transmission005.play();
-        showGlobalProgress();
-        rf005Link.classList.add("playing");
-    } else {
-        transmission005.pause();
-        rf005Link.classList.remove("playing");
-    }
-}
-
-rf005Link.addEventListener("click", function(e){
-    e.preventDefault();
-    playPauseRF005();
-});
-
-transmission005.addEventListener("ended", function(){
-    hideGlobalProgress();
-    rf005Link.classList.remove("playing");
-});
-
-transmission005.addEventListener("timeupdate", function(){
-    updateGlobalProgress(transmission005);
-});
-
-/* -------------------- */
-/* RF006 PLAYER */
-/* -------------------- */
-
-const transmission006 = new Audio("audio/RF006_FILL_SHOES.mp3");
-const rf006Link       = document.getElementById("rf006");
-
-function playPauseRF006(){
-    activeTransmission = transmission006;
-    activeToggle = playPauseRF006;
-
-    if(transmission006.paused){
-        transmission006.play();
-        showGlobalProgress();
-        rf006Link.classList.add("playing");
-    } else {
-        transmission006.pause();
-        rf006Link.classList.remove("playing");
-    }
-}
-
-rf006Link.addEventListener("click", function(e){
-    e.preventDefault();
-    playPauseRF006();
-});
-
-transmission006.addEventListener("ended", function(){
-    hideGlobalProgress();
-    rf006Link.classList.remove("playing");
-});
-
-transmission006.addEventListener("timeupdate", function(){
-    updateGlobalProgress(transmission006);
-});
-
-/* -------------------- */
-/* RF007 PLAYER */
-/* -------------------- */
-
-const transmission007 = new Audio("audio/RF007_ALLI_HO_TENS.mp3");
-const rf007Link       = document.getElementById("rf007");
-
-function playPauseRF007(){
-    activeTransmission = transmission007;
-    activeToggle = playPauseRF007;
-
-    if(transmission007.paused){
-        transmission007.play();
-        showGlobalProgress();
-        rf007Link.classList.add("playing");
-    } else {
-        transmission007.pause();
-        rf007Link.classList.remove("playing");
-    }
-}
-
-rf007Link.addEventListener("click", function(e){
-    e.preventDefault();
-    playPauseRF007();
-});
-
-transmission007.addEventListener("ended", function(){
-    hideGlobalProgress();
-    rf007Link.classList.remove("playing");
-});
-
-transmission007.addEventListener("timeupdate", function(){
-    updateGlobalProgress(transmission007);
-});
-
-/* -------------------- */
-/* RF008 PLAYER */
-/* -------------------- */
-
-const transmission008 = new Audio("audio/RF008_BOX_FAN.mp3");
-const rf008Link       = document.getElementById("rf008");
-
-function playPauseRF008(){
-    activeTransmission = transmission008;
-    activeToggle = playPauseRF008;
-
-    if(transmission008.paused){
-        transmission008.play();
-        showGlobalProgress();
-        rf008Link.classList.add("playing");
-    } else {
-        transmission008.pause();
-        rf008Link.classList.remove("playing");
-    }
-}
-
-rf008Link.addEventListener("click", function(e){
-    e.preventDefault();
-    playPauseRF008();
-});
-
-transmission008.addEventListener("ended", function(){
-    hideGlobalProgress();
-    rf008Link.classList.remove("playing");
-});
-
-transmission008.addEventListener("timeupdate", function(){
-    updateGlobalProgress(transmission008);
-});
-
-/* -------------------- */
-/* RF009 PLAYER */
-/* -------------------- */
-
-const transmission009 = new Audio("audio/RF009_UNDERRATED_PUNK.mp3");
-const rf009Link        = document.getElementById("rf009");
-
-function playPauseRF009(){
-    activeTransmission = transmission009;
-    activeToggle = playPauseRF009;
-
-    if(transmission009.paused){
-        transmission009.play();
-        showGlobalProgress();
-        rf009Link.classList.add("playing");
-    } else {
-        transmission009.pause();
-        rf009Link.classList.remove("playing");
-    }
-}
-
-rf009Link.addEventListener("click", function(e){
-    e.preventDefault();
-    playPauseRF009();
-});
-
-transmission009.addEventListener("ended", function(){
-    hideGlobalProgress();
-    rf009Link.classList.remove("playing");
-});
-
-transmission009.addEventListener("timeupdate", function(){
-    updateGlobalProgress(transmission009);
-});
-
-/* -------------------- */
-/* RF010 PLAYER */
-/* -------------------- */
-
-const transmission010 = new Audio("audio/RF010_DREAMS.mp3");
-const rf010Link        = document.getElementById("rf010");
-
-function playPauseRF010(){
-    activeTransmission = transmission010;
-    activeToggle = playPauseRF010;
-
-    if(transmission010.paused){
-        transmission010.play();
-        showGlobalProgress();
-        rf010Link.classList.add("playing");
-    } else {
-        transmission010.pause();
-        rf010Link.classList.remove("playing");
-    }
-}
-
-rf010Link.addEventListener("click", function(e){
-    e.preventDefault();
-    playPauseRF010();
-});
-
-transmission010.addEventListener("ended", function(){
-    hideGlobalProgress();
-    rf010Link.classList.remove("playing");
-});
-
-transmission010.addEventListener("timeupdate", function(){
-    updateGlobalProgress(transmission010);
-});
-
-/* -------------------- */
-/* RF011 PLAYER */
-/* -------------------- */
-
-const transmission011 = new Audio("audio/RF011_DAGGERS_DRAWN.mp3");
-const rf011Link        = document.getElementById("rf011");
-
-function playPauseRF011(){
-    activeTransmission = transmission011;
-    activeToggle = playPauseRF011;
-
-    if(transmission011.paused){
-        transmission011.play();
-        showGlobalProgress();
-        rf011Link.classList.add("playing");
-    } else {
-        transmission011.pause();
-        rf011Link.classList.remove("playing");
-    }
-}
-
-rf011Link.addEventListener("click", function(e){
-    e.preventDefault();
-    playPauseRF011();
-});
-
-transmission011.addEventListener("ended", function(){
-    hideGlobalProgress();
-    rf011Link.classList.remove("playing");
-});
-
-transmission011.addEventListener("timeupdate", function(){
-    updateGlobalProgress(transmission011);
-});
-
-/* -------------------- */
-/* RF012 PLAYER */
-/* -------------------- */
-
-const RF012_TITLE = "HASTA LUEGO JAVIER : ALACANT CON JOSE";
-
-const transmission012a = new Audio("audio/RF012_ALACANT_A.mp3");
-const transmission012b = new Audio("audio/RF012_ALACANT_B.mp3");
-
-const rf012Link     = document.getElementById("rf012");
-const rf012Dropdown = document.getElementById("rf012-dropdown");
-const rf012aLink    = document.getElementById("rf012a");
-const rf012bLink    = document.getElementById("rf012b");
-
-function playPauseRF012Part(transmission, link, partLabel){
-    activeTransmission = transmission;
-    activeToggle = function(){
-        playPauseRF012Part(transmission, link, partLabel);
-    };
-
-    if(transmission.paused){
-        transmission.play();
-        showGlobalProgress();
-        link.classList.add("playing");
-        rf012Link.classList.add("playing");
-    } else {
-        transmission.pause();
-        link.classList.remove("playing");
-        rf012Link.classList.remove("playing");
-    }
-}
-
-rf012Link.addEventListener("click", function(e){
-    e.preventDefault();
-    rf012Dropdown.classList.toggle("open");
-});
-
-rf012aLink.addEventListener("click", function(e){
-    e.preventDefault();
-    playPauseRF012Part(transmission012a, rf012aLink, "PARTE A");
-});
-
-rf012bLink.addEventListener("click", function(e){
-    e.preventDefault();
-    playPauseRF012Part(transmission012b, rf012bLink, "PARTE B");
-});
-
-transmission012a.addEventListener("ended", function(){
-    hideGlobalProgress();
-    rf012aLink.classList.remove("playing");
-    rf012Link.classList.remove("playing");
-});
-transmission012a.addEventListener("timeupdate", function(){
-    updateGlobalProgress(transmission012a);
-});
-
-transmission012b.addEventListener("ended", function(){
-    hideGlobalProgress();
-    rf012bLink.classList.remove("playing");
-    rf012Link.classList.remove("playing");
-});
-transmission012b.addEventListener("timeupdate", function(){
-    updateGlobalProgress(transmission012b);
-});
-
-/* -------------------- */
-/* RF013 PLAYER */
-/* -------------------- */
-
-const transmission013 = new Audio("audio/RF013_SMOOTH.mp3");
-const rf013Link        = document.getElementById("rf013");
-
-function playPauseRF013(){
-    activeTransmission = transmission013;
-    activeToggle = playPauseRF013;
-
-    if(transmission013.paused){
-        transmission013.play();
-        showGlobalProgress();
-        rf013Link.classList.add("playing");
-    } else {
-        transmission013.pause();
-        rf013Link.classList.remove("playing");
-    }
-}
-
-rf013Link.addEventListener("click", function(e){
-    e.preventDefault();
-    playPauseRF013();
-});
-
-transmission013.addEventListener("ended", function(){
-    hideGlobalProgress();
-    rf013Link.classList.remove("playing");
-});
-
-transmission013.addEventListener("timeupdate", function(){
-    updateGlobalProgress(transmission013);
-});
-
-/* -------------------- */
-/* RF014 PLAYER */
-/* -------------------- */
-
-const transmission014 = new Audio("audio/RF014_WALKIN_THRU.mp3");
-const rf014Link        = document.getElementById("rf014");
-
-function playPauseRF014(){
-    activeTransmission = transmission014;
-    activeToggle = playPauseRF014;
-
-    if(transmission014.paused){
-        transmission014.play();
-        showGlobalProgress();
-        rf014Link.classList.add("playing");
-    } else {
-        transmission014.pause();
-        rf014Link.classList.remove("playing");
-    }
-}
-
-rf014Link.addEventListener("click", function(e){
-    e.preventDefault();
-    playPauseRF014();
-});
-
-transmission014.addEventListener("ended", function(){
-    hideGlobalProgress();
-    rf014Link.classList.remove("playing");
-});
-
-transmission014.addEventListener("timeupdate", function(){
-    updateGlobalProgress(transmission014);
-});
-
-/* -------------------- */
-/* RF015 PLAYER */
-/* -------------------- */
-
-const transmission015 = new Audio("audio/RF015_NICK_FIRST.mp3");
-const rf015Link        = document.getElementById("rf015");
-
-function playPauseRF015(){
-    activeTransmission = transmission015;
-    activeToggle = playPauseRF015;
-
-    if(transmission015.paused){
-        transmission015.play();
-        showGlobalProgress();
-        rf015Link.classList.add("playing");
-    } else {
-        transmission015.pause();
-        rf015Link.classList.remove("playing");
-    }
-}
-
-rf015Link.addEventListener("click", function(e){
-    e.preventDefault();
-    playPauseRF015();
-});
-
-transmission015.addEventListener("ended", function(){
-    hideGlobalProgress();
-    rf015Link.classList.remove("playing");
-});
-
-transmission015.addEventListener("timeupdate", function(){
-    updateGlobalProgress(transmission015);
-});
-
-/* -------------------- */
-/* MOBILE PLAYER LABELS */
-/* -------------------- */
-
-const transmissionLabels = new Map([
-    [transmission001, rf001.textContent.trim()],
-    [transmission002, rf002Link.textContent.trim()],
-    [transmission003, rf003Link.textContent.trim()],
-    [transmission004, rf004Link.textContent.trim()],
-    [transmission005, rf005Link.textContent.trim()],
-    [transmission006, rf006Link.textContent.trim()],
-    [transmission007, rf007Link.textContent.trim()],
-    [transmission008, rf008Link.textContent.trim()],
-    [transmission009, rf009Link.textContent.trim()],
-    [transmission010, rf010Link.textContent.trim()],
-    [transmission011, rf011Link.textContent.trim()],
-    [transmission012a, RF012_TITLE + " — PARTE A"],
-    [transmission012b, RF012_TITLE + " — PARTE B"],
-    [transmission013, rf013Link.textContent.trim()],
-    [transmission014, rf014Link.textContent.trim()],
-    [transmission015, rf015Link.textContent.trim()]
-]);
 
 /* -------------------- */
 /* INFO OVERLAY */
@@ -1523,6 +742,518 @@ infoOverlay.addEventListener("click", function(e){
 document.addEventListener("keydown", function(e){
     if(e.key === "Escape") infoOverlay.classList.remove("open");
 });
+
+/* -------------------- */
+/* PLAYER */
+/* -------------------- */
+/*
+   One shared <audio> element for every show:
+   - starting a show automatically stops the one that was playing
+   - nothing downloads until someone presses play
+   - each show remembers where you left off (also after reload)
+   To add a new show, just add an entry in the HTML with
+   data-audio="audio/FILE.mp3" on its link. No JS needed.
+*/
+
+const SKIP_SECONDS = 15;
+const STORE_KEY    = "rf-player-v1";
+
+const globalProgress      = document.getElementById("global-progress");
+const globalProgressTitle = document.getElementById("global-progress-title");
+const globalProgressTime  = document.getElementById("global-progress-time");
+const globalPlayBtn       = document.getElementById("global-progress-playicon");
+
+const fullPlayer         = document.getElementById("full-player");
+const fullPlayerMinimize = document.getElementById("full-player-minimize");
+const fullPlayerTitle    = document.getElementById("full-player-title-full");
+const fullPlayerPlayBtn  = document.getElementById("full-player-playbtn");
+const fullPlayerCurrent  = document.getElementById("full-player-current");
+const fullPlayerDuration = document.getElementById("full-player-duration");
+
+const audio = new Audio();
+audio.preload = "none";
+
+let current     = null;  // show shown in the player bar
+let loaded      = null;  // show whose file is in the audio element
+let pendingSeek = null;  // where to jump once the file's metadata arrives
+let lastSaveAt  = 0;
+
+/* ---- saved state (per device) ---- */
+
+function loadStore(){
+    try{
+        const s = JSON.parse(localStorage.getItem(STORE_KEY));
+        if(s && typeof s === "object"){
+            return { last: s.last || null, pos: s.pos || {}, dur: s.dur || {} };
+        }
+    }catch(e){}
+    return { last: null, pos: {}, dur: {} };
+}
+
+const store = loadStore();
+
+function saveStore(){
+    try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){}
+}
+
+/* ---- shows ---- */
+
+const tracks = new Map();
+
+document.querySelectorAll("a[data-audio]").forEach(function(link){
+    const track = {
+        id:         link.id,
+        src:        link.getAttribute("data-audio"),
+        label:      link.getAttribute("data-label") || link.textContent.trim(),
+        link:       link,
+        parentLink: link.dataset.parent ? document.getElementById(link.dataset.parent) : null
+    };
+    tracks.set(track.id, track);
+    link.addEventListener("click", function(e){
+        e.preventDefault();
+        toggleTrack(track);
+    });
+});
+
+/* ---- helpers ---- */
+
+function formatTime(seconds){
+    seconds = Math.max(0, Math.floor(seconds || 0));
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return m + ":" + (s < 10 ? "0" : "") + s;
+}
+
+function clamp01(x){
+    return Math.min(1, Math.max(0, x));
+}
+
+function isMobileView(){
+    return window.matchMedia("(max-width:640px)").matches;
+}
+
+function isPlaying(){
+    return !!current && loaded === current && !audio.paused && !audio.error;
+}
+
+function getDuration(){
+    if(!current) return 0;
+    if(loaded === current && isFinite(audio.duration) && audio.duration > 0) return audio.duration;
+    return store.dur[current.id] || 0;
+}
+
+function getPosition(){
+    if(!current) return 0;
+    if(loaded === current) return pendingSeek !== null ? pendingSeek : audio.currentTime;
+    return store.pos[current.id] || 0;
+}
+
+function rememberPosition(){
+    if(!current) return;
+    store.pos[current.id] = getPosition();
+    store.last = current.id;
+    const d = getDuration();
+    if(d) store.dur[current.id] = d;
+    saveStore();
+    lastSaveAt = Date.now();
+}
+
+/* ---- play / pause / seek ---- */
+
+function selectTrack(track){
+    if(current === track) return;
+    if(current) rememberPosition();
+    current = track;
+    store.last = track.id;
+    saveStore();
+    showPlayer();
+}
+
+function playTrack(track){
+    selectTrack(track);
+
+    if(loaded !== track){
+        loaded = track;
+        let start = store.pos[track.id] || 0;
+        const d = store.dur[track.id];
+        if(d && start > d - 5) start = 0;
+        pendingSeek = start > 0 ? start : null;
+        audio.preload = "auto";
+        audio.src = track.src;
+    }
+
+    const p = audio.play();
+    if(p && p.catch){
+        p.catch(function(){
+            // browser refused (autoplay rules, interrupted load...): keep UI honest
+            syncUI();
+        });
+    }
+    syncUI();
+}
+
+function toggleTrack(track){
+    if(track === current && isPlaying()) audio.pause();
+    else playTrack(track);
+}
+
+function togglePlayback(){
+    if(!current) return;
+    if(isPlaying()) audio.pause();
+    else playTrack(current);
+}
+
+function seekTo(t){
+    if(!current) return;
+    const d = getDuration();
+    if(!d) return;
+    t = Math.max(0, Math.min(d - 0.5, t));
+
+    if(loaded === current){
+        if(audio.readyState >= 1){
+            pendingSeek = null;
+            audio.currentTime = t;
+        }else{
+            pendingSeek = t;
+        }
+    }else{
+        store.pos[current.id] = t;
+    }
+
+    rememberPosition();
+    render();
+    updatePositionState();
+}
+
+function skip(delta){
+    seekTo(getPosition() + delta);
+}
+
+/* ---- audio events ---- */
+
+audio.addEventListener("loadedmetadata", function(){
+    if(pendingSeek !== null){
+        const t = Math.min(pendingSeek, audio.duration - 1);
+        pendingSeek = null;
+        try{ audio.currentTime = Math.max(0, t); }catch(e){}
+    }
+    if(loaded && isFinite(audio.duration)){
+        store.dur[loaded.id] = audio.duration;
+        saveStore();
+    }
+    render();
+    updatePositionState();
+});
+
+audio.addEventListener("timeupdate", function(){
+    if(loaded !== current) return;
+    render();
+    if(Date.now() - lastSaveAt > 5000){
+        rememberPosition();
+        updatePositionState();
+    }
+});
+
+audio.addEventListener("error", function(){
+    // file missing / network failure: don't pretend to be playing
+    try{ audio.pause(); }catch(e){}
+    syncUI();
+});
+
+audio.addEventListener("play", syncUI);
+audio.addEventListener("playing", function(){
+    syncUI();
+    updatePositionState();
+});
+audio.addEventListener("pause", function(){
+    syncUI();
+    if(loaded === current) rememberPosition();
+});
+
+audio.addEventListener("ended", function(){
+    const track = loaded;
+    if(!track) return;
+
+    store.pos[track.id] = 0;
+    if(store.last === track.id) store.last = null;
+    saveStore();
+
+    if(current === track) hidePlayer();
+    syncUI();
+
+    if(track.id === "rf002") hideSecretEntry();
+});
+
+window.addEventListener("pagehide", function(){
+    if(loaded === current) rememberPosition();
+});
+document.addEventListener("visibilitychange", function(){
+    if(document.visibilityState === "hidden" && loaded === current) rememberPosition();
+});
+
+/* ---- UI ---- */
+
+function showPlayer(){
+    globalProgress.classList.add("active");
+    globalProgressTitle.textContent = current.label;
+    fullPlayerTitle.textContent = current.label;
+    updateMediaMetadata();
+    render();
+    syncUI();
+}
+
+function hidePlayer(){
+    current = null;
+    globalProgress.classList.remove("active");
+    closeFullPlayer();
+    globalProgressTitle.textContent = "";
+    fullPlayerTitle.textContent = "";
+    render();
+}
+
+function syncUI(){
+    const playing = isPlaying();
+
+    tracks.forEach(function(t){
+        t.link.classList.toggle("playing", playing && t === current);
+    });
+    tracks.forEach(function(t){
+        if(t.parentLink){
+            t.parentLink.classList.toggle("playing", playing && !!current && current.parentLink === t.parentLink);
+        }
+    });
+
+    globalProgress.classList.toggle("is-playing", playing);
+    fullPlayer.classList.toggle("is-playing", playing);
+
+    if("mediaSession" in navigator){
+        try{ navigator.mediaSession.playbackState = current ? (playing ? "playing" : "paused") : "none"; }catch(e){}
+    }
+}
+
+function clearHover(){
+    document.querySelectorAll(".scrubber.hovering").forEach(function(el){
+        el.classList.remove("hovering");
+    });
+}
+
+function openFullPlayer(){
+    if(!current) return;
+    clearHover();
+    fullPlayer.classList.add("open");
+}
+
+function closeFullPlayer(){
+    clearHover();
+    fullPlayer.classList.remove("open");
+}
+
+fullPlayerMinimize.addEventListener("click", function(e){
+    e.stopPropagation();
+    closeFullPlayer();
+});
+
+globalProgressTitle.addEventListener("click", function(){
+    if(isMobileView()) openFullPlayer();
+});
+globalProgressTime.addEventListener("click", function(){
+    if(isMobileView()) openFullPlayer();
+});
+
+function blurAfterClick(e){
+    // mouse clicks shouldn't leave focus on the button,
+    // so the space bar keeps meaning "play / pause"
+    if(e.detail > 0 && e.currentTarget.blur) e.currentTarget.blur();
+}
+
+globalPlayBtn.addEventListener("click", function(e){
+    togglePlayback();
+    blurAfterClick(e);
+});
+fullPlayerPlayBtn.addEventListener("click", function(e){
+    togglePlayback();
+    blurAfterClick(e);
+});
+
+document.querySelectorAll("[data-skip]").forEach(function(btn){
+    btn.addEventListener("click", function(e){
+        skip(Number(btn.getAttribute("data-skip")));
+        blurAfterClick(e);
+    });
+});
+
+/* ---- scrubbers (fader) ---- */
+/*
+   While dragging, only the fader moves (instantly, with a time bubble).
+   The audio jumps once, when you let go. The playing audio can't
+   pull the fader back while your finger / mouse is on it.
+*/
+
+let dragging  = null;  // scrubber being dragged
+let dragRatio = null;
+
+function makeScrubber(el){
+    const s = {
+        el:     el,
+        rail:   el.querySelector(".scrub-rail"),
+        fill:   el.querySelector(".scrub-fill"),
+        cap:    el.querySelector(".scrub-cap"),
+        bubble: el.querySelector(".scrub-bubble")
+    };
+
+    function ratioAt(clientX){
+        const r = s.rail.getBoundingClientRect();
+        return r.width ? clamp01((clientX - r.left) / r.width) : 0;
+    }
+
+    function finish(commit){
+        if(dragging !== s) return;
+        const r = dragRatio;
+        dragging = null;
+        dragRatio = null;
+        el.classList.remove("dragging");
+        if(commit && r !== null) seekTo(r * getDuration());
+        else render();
+    }
+
+    el.addEventListener("pointerdown", function(e){
+        if(!current || !getDuration()) return;
+        if(e.pointerType === "mouse" && e.button !== 0) return;
+        e.preventDefault();
+        try{ el.setPointerCapture(e.pointerId); }catch(err){}
+        dragging = s;
+        dragRatio = ratioAt(e.clientX);
+        el.classList.add("dragging");
+        el.classList.remove("hovering");
+        render();
+    });
+
+    el.addEventListener("pointermove", function(e){
+        if(dragging === s){
+            dragRatio = ratioAt(e.clientX);
+            render();
+        }else if(e.pointerType === "mouse" && !dragging && e.movementX !== 0){
+            const d = getDuration();
+            if(!d) return;
+            const r = ratioAt(e.clientX);
+            el.classList.add("hovering");
+            s.bubble.style.left = r * 100 + "%";
+            s.bubble.textContent = formatTime(r * d);
+        }
+    });
+
+    el.addEventListener("pointerup", function(){ finish(true); });
+    el.addEventListener("pointercancel", function(){ finish(false); });
+    el.addEventListener("lostpointercapture", function(){ finish(true); });
+    el.addEventListener("pointerleave", function(){ el.classList.remove("hovering"); });
+
+    return s;
+}
+
+const scrubbers = [
+    makeScrubber(document.getElementById("global-progress-scrub")),
+    makeScrubber(document.getElementById("full-player-progress"))
+];
+
+function render(){
+    const d = getDuration();
+    const actual = getPosition();
+    const ratio = dragRatio !== null ? dragRatio : (d ? clamp01(actual / d) : 0);
+    const shown = dragRatio !== null ? dragRatio * d : actual;
+    const pct = ratio * 100 + "%";
+
+    scrubbers.forEach(function(s){
+        s.fill.style.width = pct;
+        s.cap.style.left = pct;
+        if(dragging === s){
+            s.bubble.style.left = pct;
+            s.bubble.textContent = formatTime(shown);
+        }
+    });
+
+    const cur = formatTime(shown);
+    const dur = d ? formatTime(d) : "--:--";
+    globalProgressTime.textContent = current ? cur + " / " + dur : "0:00";
+    fullPlayerCurrent.textContent = cur;
+    fullPlayerDuration.textContent = dur;
+}
+
+/* ---- keyboard (desktop) ---- */
+/* space = play / pause, ← → = 15 seconds */
+
+document.addEventListener("keydown", function(e){
+    if(!current) return;
+    if(e.metaKey || e.ctrlKey || e.altKey) return;
+    if(terminalOverlay.classList.contains("open") || infoOverlay.classList.contains("open")) return;
+
+    const t = e.target;
+    if(t && t.closest && t.closest("input, textarea, select, [contenteditable]")) return;
+
+    if(e.key === " " || e.key === "Spacebar"){
+        if(t && t.closest && t.closest("button")) return; // let a focused button do its own thing
+        e.preventDefault();
+        togglePlayback();
+    }else if(e.key === "ArrowLeft"){
+        e.preventDefault();
+        skip(-SKIP_SECONDS);
+    }else if(e.key === "ArrowRight"){
+        e.preventDefault();
+        skip(SKIP_SECONDS);
+    }else if(e.key === "Escape"){
+        closeFullPlayer();
+    }
+});
+
+/* ---- lock screen / headphones / control center ---- */
+
+function updateMediaMetadata(){
+    if(!("mediaSession" in navigator) || !current || typeof MediaMetadata === "undefined") return;
+    try{
+        navigator.mediaSession.metadata = new MediaMetadata({
+            title:  current.label,
+            artist: "radio finlandia",
+            album:  "radio finlandia"
+        });
+    }catch(e){}
+}
+
+function updatePositionState(){
+    if(!("mediaSession" in navigator) || !navigator.mediaSession.setPositionState) return;
+    const d = getDuration();
+    if(!current || !d || loaded !== current) return;
+    try{
+        navigator.mediaSession.setPositionState({
+            duration:     d,
+            playbackRate: audio.playbackRate || 1,
+            position:     Math.min(getPosition(), d)
+        });
+    }catch(e){}
+}
+
+if("mediaSession" in navigator){
+    const handlers = {
+        play:         function(){ if(current) playTrack(current); },
+        pause:        function(){ audio.pause(); },
+        seekbackward: function(details){ skip(-((details && details.seekOffset) || SKIP_SECONDS)); },
+        seekforward:  function(details){ skip((details && details.seekOffset) || SKIP_SECONDS); },
+        seekto:       function(details){ if(details && typeof details.seekTime === "number") seekTo(details.seekTime); }
+    };
+    Object.keys(handlers).forEach(function(action){
+        try{ navigator.mediaSession.setActionHandler(action, handlers[action]); }catch(e){}
+    });
+}
+
+/* ---- restore last show after reload (paused, ready to resume) ---- */
+
+(function restoreLastShow(){
+    const last = store.last && tracks.get(store.last);
+    if(last && last.id !== "rf002"){   // the secret show stays secret
+        current = last;
+        showPlayer();
+        const parentDropdown = last.link.closest(".parts-dropdown");
+        if(parentDropdown) parentDropdown.classList.add("open");
+    }
+})();
 
 </script>
 
